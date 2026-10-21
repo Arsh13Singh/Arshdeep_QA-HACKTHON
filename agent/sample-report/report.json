@@ -1,0 +1,3076 @@
+{
+  "meta": {
+    "target_url": "http://localhost:5173",
+    "api_base": "http://localhost:8000",
+    "prd": "../test-website/PRD.md",
+    "run_id": "192644",
+    "started": "2026-10-19T19:26:44",
+    "duration_s": 115.9,
+    "llm_mode": "offline",
+    "models": {
+      "fast": "claude-haiku-5-5",
+      "smart": "claude-sonnet-5-5"
+    },
+    "browser_actions": 261,
+    "chaos": false,
+    "api_events_captured": 568,
+    "heals": [],
+    "compensations": [
+      {
+        "scenario": "TRF-VALID",
+        "action": "compensating transfer 1.37 Rainy Day Savings -> Everyday Checking: HTTP 201"
+      },
+      {
+        "scenario": "TRF-VALID-NOMEMO",
+        "action": "compensating transfer 2.05 Everyday Checking -> Rainy Day Savings: HTTP 201"
+      },
+      {
+        "scenario": "TRF-MIN",
+        "action": "compensating transfer 0.01 Rainy Day Savings -> Everyday Checking: HTTP 201"
+      },
+      {
+        "scenario": "TRF-EXACT-BALANCE",
+        "action": "compensating transfer 4369.75 Rainy Day Savings -> Everyday Checking: HTTP 201"
+      },
+      {
+        "scenario": "TRF-OVERDRAFT",
+        "action": "compensating transfer 4369.76 Rainy Day Savings -> Everyday Checking: HTTP 201"
+      },
+      {
+        "scenario": "TRF-AMT-NEG",
+        "action": "compensating transfer 5.00 Everyday Checking -> Rainy Day Savings: HTTP 201"
+      },
+      {
+        "scenario": "TRF-SERVER-FAIL",
+        "action": "compensating transfer 3.00 Rainy Day Savings -> Everyday Checking: HTTP 201"
+      },
+      {
+        "scenario": "TRF-DOUBLE",
+        "action": "compensating transfer 1.11 Rainy Day Savings -> Everyday Checking: HTTP 201"
+      },
+      {
+        "scenario": "TRF-MEMO-TEXT",
+        "action": "compensating transfer 0.50 Rainy Day Savings -> Everyday Checking: HTTP 201"
+      }
+    ],
+    "unmapped_anchors": []
+  },
+  "summary": {
+    "summary": "31 requirements passed, 5 failed and 0 could not be verified. Failing scenarios: HIS-ROWS, HIS-DATE-BOUNDARY, TRF-OVERDRAFT, TRF-AMT-NEG, TRF-AMT-ZERO, TRF-AMT-ZERO2. Each failure below lists reproduction steps, expected vs observed values and evidence.",
+    "fixes": {},
+    "source": "template"
+  },
+  "counts": {
+    "passed": 31,
+    "failed": 5,
+    "unverified": 0
+  },
+  "requirements": [
+    {
+      "id": "GEN-01",
+      "section": "Purpose",
+      "text": "The application must never initiate real payments or connect to an external bank.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "1 assertion(s) passed across 1 scenario(s)"
+    },
+    {
+      "id": "SES-01",
+      "section": "Users and access",
+      "text": "The target has one seeded demo customer.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "1 assertion(s) passed across 1 scenario(s)"
+    },
+    {
+      "id": "SES-02",
+      "section": "Users and access",
+      "text": "The landing page provides a clearly labeled Enter Demo action. It opens the demo dashboard without requiring a password or real identity information.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "3 assertion(s) passed across 1 scenario(s)"
+    },
+    {
+      "id": "SES-03",
+      "section": "Users and access",
+      "text": "The header identifies the active demo customer and provides a Log out action.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "2 assertion(s) passed across 1 scenario(s)"
+    },
+    {
+      "id": "SES-04",
+      "section": "Users and access",
+      "text": "Logging out returns the user to the landing page. Protected dashboard views should not remain usable after logout; direct navigation to them should return the user to the landing page or an access-required state.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "12 assertion(s) passed across 2 scenario(s)"
+    },
+    {
+      "id": "SES-05",
+      "section": "Users and access",
+      "text": "Refreshing while in a valid demo session should preserve that session. A logged-out user must not regain access merely by refreshing a protected page.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "4 assertion(s) passed across 2 scenario(s)"
+    },
+    {
+      "id": "DSH-01",
+      "section": "Dashboard and accounts",
+      "text": "The dashboard shows the customer's checking and savings accounts.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "1 assertion(s) passed across 1 scenario(s)"
+    },
+    {
+      "id": "DSH-02",
+      "section": "Dashboard and accounts",
+      "text": "Each account displays a readable account name, a masked account identifier, account type, and current available balance in USD.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "2 assertion(s) passed across 1 scenario(s)"
+    },
+    {
+      "id": "DSH-03",
+      "section": "Dashboard and accounts",
+      "text": "Balances are displayed to two decimal places. The UI must not expose a full account identifier.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "8 assertion(s) passed across 2 scenario(s)"
+    },
+    {
+      "id": "DSH-04",
+      "section": "Dashboard and accounts",
+      "text": "Selecting an account opens an account detail view with its current balance and related transaction history.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "2 assertion(s) passed across 1 scenario(s)"
+    },
+    {
+      "id": "DSH-05",
+      "section": "Dashboard and accounts",
+      "text": "Account balances shown on the dashboard and detail view must agree with the latest successful transactions.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "5 assertion(s) passed across 3 scenario(s)"
+    },
+    {
+      "id": "TRF-01",
+      "section": "Transfers between owned accounts",
+      "text": "The user can transfer funds between the checking and savings accounts owned by the demo customer.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "2 assertion(s) passed across 2 scenario(s)"
+    },
+    {
+      "id": "TRF-02",
+      "section": "Transfers between owned accounts",
+      "text": "The transfer form includes source account, destination account, amount, and an optional memo.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "3 assertion(s) passed across 2 scenario(s)"
+    },
+    {
+      "id": "TRF-03",
+      "section": "Transfers between owned accounts",
+      "text": "The source and destination must be different accounts. Same-account transfers must be rejected with a clear explanation and must not alter balances or create a transaction.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "4 assertion(s) passed across 1 scenario(s)"
+    },
+    {
+      "id": "TRF-04",
+      "section": "Transfers between owned accounts",
+      "text": "Amount must be a positive number greater than zero, with no more than two digits after the decimal point. Blank, zero, negative, non-numeric, and over-precision values must be rejected with a clear validation message. Rejected input must not create a transaction or change balances.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "failed",
+      "verdict_reason": "7 failing assertion(s), e.g. a negative amount ('-5.00'): the transfer is rejected"
+    },
+    {
+      "id": "TRF-05",
+      "section": "Transfers between owned accounts",
+      "text": "The amount must not exceed the source account's available balance. If funds are insufficient, the transfer must be rejected, both balances must remain unchanged, and no completed transfer must appear in history.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "failed",
+      "verdict_reason": "3 failing assertion(s), e.g. amount $4369.76 (balance + $0.01): the transfer is rejected"
+    },
+    {
+      "id": "TRF-06",
+      "section": "Transfers between owned accounts",
+      "text": "A valid transfer is atomic: the source balance decreases by the amount and the destination balance increases by the same amount. No partial transfer is allowed.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "3 assertion(s) passed across 3 scenario(s)"
+    },
+    {
+      "id": "TRF-07",
+      "section": "Transfers between owned accounts",
+      "text": "A successful transfer creates one completed transfer record that can be found in both relevant account histories. The record shows the amount, date and time, source, destination, status, and memo if supplied.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "5 assertion(s) passed across 2 scenario(s)"
+    },
+    {
+      "id": "TRF-08",
+      "section": "Transfers between owned accounts",
+      "text": "The UI reports success only after the transfer has been committed. If a transfer is rejected or fails, the UI must explain that it did not complete and must not show a success state.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "failed",
+      "verdict_reason": "4 failing assertion(s), e.g. amount $4369.76 (balance + $0.01): no success state is shown"
+    },
+    {
+      "id": "TRF-09",
+      "section": "Transfers between owned accounts",
+      "text": "Refreshing after a successful transfer must preserve the updated balances and transaction record.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "1 assertion(s) passed across 1 scenario(s)"
+    },
+    {
+      "id": "HIS-01",
+      "section": "Transaction history",
+      "text": "The user can view a combined transaction history and account-specific history.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "5 assertion(s) passed across 2 scenario(s)"
+    },
+    {
+      "id": "HIS-02",
+      "section": "Transaction history",
+      "text": "Each row shows date and time, description or memo, transaction type, amount, status, and relevant account. Amount direction should be clear for deposits, withdrawals, and transfers.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "failed",
+      "verdict_reason": "1 failing assertion(s), e.g. Each row's amount equals the transaction amount"
+    },
+    {
+      "id": "HIS-03",
+      "section": "Transaction history",
+      "text": "The user can filter history by account, transaction type, status, and date range. When filters are applied, every displayed row must satisfy all selected filters.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "21 assertion(s) passed across 3 scenario(s)"
+    },
+    {
+      "id": "HIS-04",
+      "section": "Transaction history",
+      "text": "The start and end dates are inclusive. A transaction occurring on either boundary date must be included when it matches the other filters.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "failed",
+      "verdict_reason": "6 failing assertion(s), e.g. start = end = that day: includes Demo utilities (2025-03-05T02:45:00Z UTC = 2025-03-04 PT)"
+    },
+    {
+      "id": "HIS-05",
+      "section": "Transaction history",
+      "text": "An empty result set must show a clear empty state, not an error or unrelated transactions.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "2 assertion(s) passed across 1 scenario(s)"
+    },
+    {
+      "id": "HIS-06",
+      "section": "Transaction history",
+      "text": "Clearing filters restores the unfiltered history.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "2 assertion(s) passed across 1 scenario(s)"
+    },
+    {
+      "id": "PRF-01",
+      "section": "Profile",
+      "text": "A profile view displays only synthetic demo-customer details, such as display name and a masked email address.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "2 assertion(s) passed across 1 scenario(s)"
+    },
+    {
+      "id": "PRF-02",
+      "section": "Profile",
+      "text": "The view must not reveal passwords, authentication tokens, full account identifiers, or data belonging to another user.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "2 assertion(s) passed across 1 scenario(s)"
+    },
+    {
+      "id": "UI-01",
+      "section": "General interface behavior",
+      "text": "The target works in a current desktop browser at a 1280 \u00d7 800 viewport and remains usable at narrower widths.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "9 assertion(s) passed across 1 scenario(s)"
+    },
+    {
+      "id": "UI-02",
+      "section": "General interface behavior",
+      "text": "Interactive controls have readable labels and communicate loading, success, validation, and failure states.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "6 assertion(s) passed across 2 scenario(s)"
+    },
+    {
+      "id": "UI-03",
+      "section": "General interface behavior",
+      "text": "A submitted action should not silently disappear. While waiting, the UI should show a loading state or otherwise prevent accidental duplicate submission.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "2 assertion(s) passed across 1 scenario(s)"
+    },
+    {
+      "id": "UI-04",
+      "section": "General interface behavior",
+      "text": "Navigation links and buttons lead to the labeled destination or perform the labeled action.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "8 assertion(s) passed across 1 scenario(s)"
+    },
+    {
+      "id": "UI-05",
+      "section": "General interface behavior",
+      "text": "A recoverable error must leave the user able to retry or return to the dashboard.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "5 assertion(s) passed across 3 scenario(s)"
+    },
+    {
+      "id": "SEED-01",
+      "section": "Seed data expectations",
+      "text": "The demo begins with one customer, one checking account, one savings account, and enough historical transactions to exercise account, type, status, and date filters.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "2 assertion(s) passed across 1 scenario(s)"
+    },
+    {
+      "id": "SEED-02",
+      "section": "Seed data expectations",
+      "text": "Seed records should include multiple dates and at least one transfer between the two accounts.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "1 assertion(s) passed across 1 scenario(s)"
+    },
+    {
+      "id": "SEED-03",
+      "section": "Seed data expectations",
+      "text": "The demo has no signup, external payment, bill-pay, loan, card, or multi-user features.",
+      "atomic": [],
+      "test_ideas": [],
+      "verdict": "passed",
+      "verdict_reason": "1 assertion(s) passed across 1 scenario(s)"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "SEED-DATA",
+      "title": "Seed data: one customer, one checking + one savings, varied history incl. a transfer",
+      "kind": "positive",
+      "anchors": [
+        "one checking account, one savings account"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'"
+      ],
+      "assertions": [
+        {
+          "covers": "SEED-01",
+          "statement": "Exactly one checking and one savings account",
+          "verdict": "passed",
+          "expected": "['checking', 'savings']",
+          "observed": "['checking', 'savings']"
+        },
+        {
+          "covers": "SEED-01",
+          "statement": "History covers every type and status for filtering",
+          "verdict": "passed",
+          "expected": "all 3 types, all 3 statuses",
+          "observed": "types=['deposit', 'transfer', 'withdrawal'] statuses=['completed', 'failed', 'pending']"
+        },
+        {
+          "covers": "SEED-02",
+          "statement": "Multiple dates and \u22651 transfer between the two accounts",
+          "verdict": "passed",
+          "expected": ">1 date, \u22651 transfer",
+          "observed": "12 dates, 2 transfers"
+        },
+        {
+          "covers": "SEED-03",
+          "statement": "No out-of-scope features (signup, bill-pay, loans, cards) exposed",
+          "verdict": "passed",
+          "expected": "none",
+          "observed": "none"
+        }
+      ],
+      "evidence": [],
+      "error": "",
+      "duration_s": 1.1,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "SES-ENTER",
+      "title": "Enter Demo opens the dashboard without credentials",
+      "kind": "positive",
+      "anchors": [
+        "clearly labeled Enter Demo"
+      ],
+      "steps": [
+        "Open the landing page '/' in a fresh browser profile",
+        "Click 'Enter Demo'"
+      ],
+      "assertions": [
+        {
+          "covers": "SES-02",
+          "statement": "Landing page shows a control labelled 'Enter Demo'",
+          "verdict": "passed",
+          "expected": "visible button/link named 'Enter Demo'",
+          "observed": "found"
+        },
+        {
+          "covers": "SES-02",
+          "statement": "No password or identity fields are required",
+          "verdict": "passed",
+          "expected": "0 credential inputs",
+          "observed": "0 credential input(s)"
+        },
+        {
+          "covers": "SES-02",
+          "statement": "Enter Demo opens the demo dashboard",
+          "verdict": "passed",
+          "expected": "URL /dashboard with account balances visible",
+          "observed": "URL /dashboard, 2 balance block(s) visible"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "SES-ENTER landing page",
+          "value": "screenshots/001-ses-enter-landing-page.png"
+        },
+        {
+          "kind": "screenshot",
+          "label": "SES-ENTER after enter demo",
+          "value": "screenshots/002-ses-enter-after-enter-demo.png"
+        }
+      ],
+      "error": "",
+      "duration_s": 1.6,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "SES-HEADER",
+      "title": "Header shows the active customer and a Log out action",
+      "kind": "positive",
+      "anchors": [
+        "header identifies the active demo customer"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Read the page header on /dashboard"
+      ],
+      "assertions": [
+        {
+          "covers": "SES-03",
+          "statement": "Header shows the signed-in customer's name",
+          "verdict": "passed",
+          "expected": "header contains 'Avery Demo'",
+          "observed": "D DemoBank Dashboard Transactions Transfer Profile Signed in as Avery Demo Log out"
+        },
+        {
+          "covers": "SES-03",
+          "statement": "Header provides a 'Log out' action",
+          "verdict": "passed",
+          "expected": "visible 'Log out' button",
+          "observed": "1 'Log out' button(s)"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "value",
+          "label": "Customer per /api/me",
+          "value": "{'id': '00000000-0000-0000-0000-000000000001', 'display_name': 'Avery Demo', 'masked_email': 'a***@example.test'}"
+        },
+        {
+          "kind": "screenshot",
+          "label": "SES-HEADER header",
+          "value": "screenshots/003-ses-header-header.png"
+        }
+      ],
+      "error": "",
+      "duration_s": 1.1,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "SES-SINGLE",
+      "title": "Every demo session is the same single seeded customer",
+      "kind": "positive",
+      "anchors": [
+        "one seeded demo customer"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Session A: read /api/me",
+        "Session B (new browser profile): Enter Demo and read /api/me"
+      ],
+      "assertions": [
+        {
+          "covers": "SES-01",
+          "statement": "Two independent demo sessions resolve to the same customer",
+          "verdict": "passed",
+          "expected": "identical customer id",
+          "observed": "A=00000000-0000-0000-0000-000000000001 B=00000000-0000-0000-0000-000000000001"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "value",
+          "label": "Session A customer",
+          "value": "{'id': '00000000-0000-0000-0000-000000000001', 'display_name': 'Avery Demo', 'masked_email': 'a***@example.test'}"
+        },
+        {
+          "kind": "value",
+          "label": "Session B customer",
+          "value": "{'id': '00000000-0000-0000-0000-000000000001', 'display_name': 'Avery Demo', 'masked_email': 'a***@example.test'}"
+        }
+      ],
+      "error": "",
+      "duration_s": 2.0,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "SES-REFRESH",
+      "title": "Refreshing protected pages keeps the session",
+      "kind": "positive",
+      "anchors": [
+        "Refreshing while in a valid demo session"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Open /dashboard and press browser refresh",
+        "Open /transactions and press browser refresh",
+        "Open /profile and press browser refresh"
+      ],
+      "assertions": [
+        {
+          "covers": "SES-05",
+          "statement": "Refreshing /dashboard keeps the user signed in",
+          "verdict": "passed",
+          "expected": "still on /dashboard with the signed-in header",
+          "observed": "URL /dashboard; protected=True"
+        },
+        {
+          "covers": "SES-05",
+          "statement": "Refreshing /transactions keeps the user signed in",
+          "verdict": "passed",
+          "expected": "still on /transactions with the signed-in header",
+          "observed": "URL /transactions; protected=True"
+        },
+        {
+          "covers": "SES-05",
+          "statement": "Refreshing /profile keeps the user signed in",
+          "verdict": "passed",
+          "expected": "still on /profile with the signed-in header",
+          "observed": "URL /profile; protected=True"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "SES-REFRESH after refresh",
+          "value": "screenshots/004-ses-refresh-after-refresh.png"
+        }
+      ],
+      "error": "",
+      "duration_s": 4.5,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "SES-ANON",
+      "title": "A visitor who never entered the demo cannot open protected pages",
+      "kind": "negative",
+      "anchors": [
+        "direct navigation to them should return the user to the landing page"
+      ],
+      "steps": [
+        "Fresh browser profile: navigate directly to /dashboard",
+        "Fresh browser profile: navigate directly to /transactions",
+        "Fresh browser profile: navigate directly to /transfer",
+        "Fresh browser profile: navigate directly to /profile"
+      ],
+      "assertions": [
+        {
+          "covers": "SES-04",
+          "statement": "Anonymous visit to /dashboard is redirected",
+          "verdict": "passed",
+          "expected": "landing page or access-required state",
+          "observed": "URL /; protected=False"
+        },
+        {
+          "covers": "SES-04",
+          "statement": "Anonymous visit to /transactions is redirected",
+          "verdict": "passed",
+          "expected": "landing page or access-required state",
+          "observed": "URL /; protected=False"
+        },
+        {
+          "covers": "SES-04",
+          "statement": "Anonymous visit to /transfer is redirected",
+          "verdict": "passed",
+          "expected": "landing page or access-required state",
+          "observed": "URL /; protected=False"
+        },
+        {
+          "covers": "SES-04",
+          "statement": "Anonymous visit to /profile is redirected",
+          "verdict": "passed",
+          "expected": "landing page or access-required state",
+          "observed": "URL /; protected=False"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "SES-ANON anonymous redirect",
+          "value": "screenshots/005-ses-anon-anonymous-redirect.png"
+        }
+      ],
+      "error": "",
+      "duration_s": 2.6,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "DSH-CARDS",
+      "title": "Dashboard lists checking and savings with masked IDs and USD balances",
+      "kind": "positive",
+      "anchors": [
+        "checking and savings accounts"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'"
+      ],
+      "assertions": [
+        {
+          "covers": "DSH-01",
+          "statement": "Dashboard shows both a checking and a savings account",
+          "verdict": "passed",
+          "expected": "checking + savings cards",
+          "observed": "types shown: ['checking', 'savings']"
+        },
+        {
+          "covers": "DSH-02",
+          "statement": "Everyday Checking: readable name, masked id, type and USD balance shown",
+          "verdict": "passed",
+          "expected": "name, masked identifier (e.g. \u2022\u2022\u2022\u2022 1234), type, $ balance + USD",
+          "observed": "name='Everyday Checking' masked='\u2022\u2022\u2022\u2022 1042' type='checking' balance='$4,369.75' currency='USD'"
+        },
+        {
+          "covers": "DSH-03",
+          "statement": "Everyday Checking: balance has exactly two decimals",
+          "verdict": "passed",
+          "expected": "e.g. $1,234.50",
+          "observed": "$4,369.75"
+        },
+        {
+          "covers": "DSH-03",
+          "statement": "Everyday Checking: identifier is masked",
+          "verdict": "passed",
+          "expected": "at most last 4 digits visible",
+          "observed": "\u2022\u2022\u2022\u2022 1042"
+        },
+        {
+          "covers": "DSH-02",
+          "statement": "Rainy Day Savings: readable name, masked id, type and USD balance shown",
+          "verdict": "passed",
+          "expected": "name, masked identifier (e.g. \u2022\u2022\u2022\u2022 1234), type, $ balance + USD",
+          "observed": "name='Rainy Day Savings' masked='\u2022\u2022\u2022\u2022 7781' type='savings' balance='$8,275.00' currency='USD'"
+        },
+        {
+          "covers": "DSH-03",
+          "statement": "Rainy Day Savings: balance has exactly two decimals",
+          "verdict": "passed",
+          "expected": "e.g. $1,234.50",
+          "observed": "$8,275.00"
+        },
+        {
+          "covers": "DSH-03",
+          "statement": "Rainy Day Savings: identifier is masked",
+          "verdict": "passed",
+          "expected": "at most last 4 digits visible",
+          "observed": "\u2022\u2022\u2022\u2022 7781"
+        },
+        {
+          "covers": "DSH-03",
+          "statement": "No full-length account number anywhere on the dashboard",
+          "verdict": "passed",
+          "expected": "no 8+ digit sequences in visible text",
+          "observed": "none found"
+        },
+        {
+          "covers": "DSH-05",
+          "statement": "Everyday Checking: dashboard balance matches the backend balance",
+          "verdict": "passed",
+          "expected": "$4369.75",
+          "observed": "$4,369.75"
+        },
+        {
+          "covers": "DSH-05",
+          "statement": "Rainy Day Savings: dashboard balance matches the backend balance",
+          "verdict": "passed",
+          "expected": "$8275.00",
+          "observed": "$8,275.00"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "DSH-CARDS dashboard",
+          "value": "screenshots/006-dsh-cards-dashboard.png"
+        },
+        {
+          "kind": "value",
+          "label": "Cards parsed from UI",
+          "value": "[{'name': 'Everyday Checking', 'type': 'checking', 'masked': '\u2022\u2022\u2022\u2022 1042', 'balance_text': '$4,369.75', 'balance': Decimal('4369.75'), 'currency': 'USD', 'href': '/accounts/00000000-0000-0000-0000-000000000101'}, {'name': 'Rainy Day Savings', 'type': 'savings', 'masked': '\u2022\u2022\u2022\u2022 7781', 'balance_text': '$8,275.00', 'balance': Decimal('8275.00'), 'currency': 'USD', 'href': '/accounts/00000000-0000-0000-0000-000000000102'}]"
+        }
+      ],
+      "error": "",
+      "duration_s": 1.7,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "DSH-DETAIL",
+      "title": "Selecting each account opens a detail view with balance and its own history",
+      "kind": "positive",
+      "anchors": [
+        "opens an account detail view"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Click the 'Everyday Checking' account card",
+        "Click the 'Rainy Day Savings' account card"
+      ],
+      "assertions": [
+        {
+          "covers": "DSH-04",
+          "statement": "Everyday Checking: detail view opens with its name and balance",
+          "verdict": "passed",
+          "expected": "heading 'Everyday Checking' + balance",
+          "observed": "URL /accounts/00000000-0000-0000-0000-000000000101, heading 'Everyday Checking', balance 4369.75"
+        },
+        {
+          "covers": "DSH-05",
+          "statement": "Everyday Checking: detail balance equals dashboard balance",
+          "verdict": "passed",
+          "expected": "$4,369.75",
+          "observed": "4369.75"
+        },
+        {
+          "covers": "HIS-01",
+          "statement": "Everyday Checking: history lists every transaction of this account",
+          "verdict": "passed",
+          "expected": "8 rows",
+          "observed": "8 rows"
+        },
+        {
+          "covers": "HIS-01",
+          "statement": "Everyday Checking: every history row involves this account",
+          "verdict": "passed",
+          "expected": "all rows reference this account",
+          "observed": "0 foreign row(s): "
+        },
+        {
+          "covers": "DSH-04",
+          "statement": "Rainy Day Savings: detail view opens with its name and balance",
+          "verdict": "passed",
+          "expected": "heading 'Rainy Day Savings' + balance",
+          "observed": "URL /accounts/00000000-0000-0000-0000-000000000102, heading 'Rainy Day Savings', balance 8275.00"
+        },
+        {
+          "covers": "DSH-05",
+          "statement": "Rainy Day Savings: detail balance equals dashboard balance",
+          "verdict": "passed",
+          "expected": "$8,275.00",
+          "observed": "8275.00"
+        },
+        {
+          "covers": "HIS-01",
+          "statement": "Rainy Day Savings: history lists every transaction of this account",
+          "verdict": "passed",
+          "expected": "6 rows",
+          "observed": "6 rows"
+        },
+        {
+          "covers": "HIS-01",
+          "statement": "Rainy Day Savings: every history row involves this account",
+          "verdict": "passed",
+          "expected": "all rows reference this account",
+          "observed": "0 foreign row(s): "
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "DSH-DETAIL detail Everyday Checking",
+          "value": "screenshots/007-dsh-detail-detail-everyday-checking.png"
+        },
+        {
+          "kind": "screenshot",
+          "label": "DSH-DETAIL detail Rainy Day Savings",
+          "value": "screenshots/008-dsh-detail-detail-rainy-day-savings.png"
+        }
+      ],
+      "error": "",
+      "duration_s": 2.6,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "DSH-MASK-API",
+      "title": "Masked identifier format is consistent across dashboard, detail and forms",
+      "kind": "edge",
+      "anchors": [
+        "masked account identifier"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'"
+      ],
+      "assertions": [
+        {
+          "covers": "DSH-03",
+          "statement": "/dashboard: no full account number visible",
+          "verdict": "passed",
+          "expected": "only masked identifiers",
+          "observed": "masks=['\u2022\u2022\u2022\u2022 1042', '\u2022\u2022\u2022\u2022 7781'] leaks=none"
+        },
+        {
+          "covers": "DSH-03",
+          "statement": "/transfer: no full account number visible",
+          "verdict": "passed",
+          "expected": "only masked identifiers",
+          "observed": "masks=['\u2022\u2022\u2022\u2022 1042', '\u2022\u2022\u2022\u2022 7781'] leaks=none"
+        },
+        {
+          "covers": "DSH-03",
+          "statement": "/transactions: no full account number visible",
+          "verdict": "passed",
+          "expected": "only masked identifiers",
+          "observed": "masks=['\u2022\u2022\u2022\u2022 1042', '\u2022\u2022\u2022\u2022 7781'] leaks=none"
+        }
+      ],
+      "evidence": [],
+      "error": "",
+      "duration_s": 2.6,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "HIS-ROWS",
+      "title": "Combined history shows every transaction with complete, correct row details",
+      "kind": "positive",
+      "anchors": [
+        "combined transaction history"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Open /transactions without filters and read every table row"
+      ],
+      "assertions": [
+        {
+          "covers": "HIS-01",
+          "statement": "Combined history lists all transactions",
+          "verdict": "passed",
+          "expected": "12 rows (per backend)",
+          "observed": "12 rows"
+        },
+        {
+          "covers": "HIS-02",
+          "statement": "Every row shows date/time, description, type, account, amount, status",
+          "verdict": "passed",
+          "expected": "all six fields populated",
+          "observed": "all populated"
+        },
+        {
+          "covers": "HIS-02",
+          "statement": "Each row's amount equals the transaction amount",
+          "verdict": "failed",
+          "expected": "row amount = record amount",
+          "observed": "[\"Returned demo deposit (failed deposit): shows 'No change:\\\\n$0.00', record amount $700.00\", \"Pending demo debit (pending withdrawal): shows 'No change:\\\\n$0.00', record amount $125.00\", \"Declined demo item (failed withdrawal): shows 'No change:\\\\n$0.00', record amount $900.00\", \"Pending demo deposit (pending deposit): shows 'No change:\\\\n$0.00', record amount $400.00\"]"
+        },
+        {
+          "covers": "HIS-02",
+          "statement": "Each row's type and status match the record",
+          "verdict": "passed",
+          "expected": "labels match",
+          "observed": "all match"
+        },
+        {
+          "covers": "HIS-02",
+          "statement": "Deposits read as money in, withdrawals as money out, transfers show From/To",
+          "verdict": "passed",
+          "expected": "+ for deposits, \u2212 for withdrawals, From\u2192To for transfers",
+          "observed": "all clear"
+        },
+        {
+          "covers": "HIS-02",
+          "statement": "Displayed date matches the transaction's Pacific-time date",
+          "verdict": "passed",
+          "expected": "date in Pacific Time (as the UI states)",
+          "observed": "all match"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "HIS-ROWS all transactions",
+          "value": "screenshots/009-his-rows-all-transactions.png"
+        }
+      ],
+      "error": "",
+      "duration_s": 1.7,
+      "attempts": 1,
+      "verdict": "failed"
+    },
+    {
+      "id": "HIS-FILTER-SINGLE",
+      "title": "Each single filter (account, type, status) shows exactly the matching rows",
+      "kind": "positive",
+      "anchors": [
+        "every displayed row must satisfy all selected filters"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Filter Type = Deposit",
+        "Filter Type = Withdrawal",
+        "Filter Type = Transfer",
+        "Filter Status = Completed",
+        "Filter Status = Pending",
+        "Filter Status = Failed",
+        "Filter Account = Everyday Checking",
+        "Filter Account = Rainy Day Savings"
+      ],
+      "assertions": [
+        {
+          "covers": "HIS-03",
+          "statement": "Type=Deposit: no row outside the filter is shown",
+          "verdict": "passed",
+          "expected": "0 unexpected rows",
+          "observed": "0 unexpected row(s)"
+        },
+        {
+          "covers": "HIS-03",
+          "statement": "Type=Deposit: every matching transaction is shown",
+          "verdict": "passed",
+          "expected": "5 rows",
+          "observed": "5 rows; missing 0: "
+        },
+        {
+          "covers": "HIS-03",
+          "statement": "Type=Withdrawal: no row outside the filter is shown",
+          "verdict": "passed",
+          "expected": "0 unexpected rows",
+          "observed": "0 unexpected row(s)"
+        },
+        {
+          "covers": "HIS-03",
+          "statement": "Type=Withdrawal: every matching transaction is shown",
+          "verdict": "passed",
+          "expected": "5 rows",
+          "observed": "5 rows; missing 0: "
+        },
+        {
+          "covers": "HIS-03",
+          "statement": "Type=Transfer: no row outside the filter is shown",
+          "verdict": "passed",
+          "expected": "0 unexpected rows",
+          "observed": "0 unexpected row(s)"
+        },
+        {
+          "covers": "HIS-03",
+          "statement": "Type=Transfer: every matching transaction is shown",
+          "verdict": "passed",
+          "expected": "2 rows",
+          "observed": "2 rows; missing 0: "
+        },
+        {
+          "covers": "HIS-03",
+          "statement": "Status=Completed: no row outside the filter is shown",
+          "verdict": "passed",
+          "expected": "0 unexpected rows",
+          "observed": "0 unexpected row(s)"
+        },
+        {
+          "covers": "HIS-03",
+          "statement": "Status=Completed: every matching transaction is shown",
+          "verdict": "passed",
+          "expected": "8 rows",
+          "observed": "8 rows; missing 0: "
+        },
+        {
+          "covers": "HIS-03",
+          "statement": "Status=Pending: no row outside the filter is shown",
+          "verdict": "passed",
+          "expected": "0 unexpected rows",
+          "observed": "0 unexpected row(s)"
+        },
+        {
+          "covers": "HIS-03",
+          "statement": "Status=Pending: every matching transaction is shown",
+          "verdict": "passed",
+          "expected": "2 rows",
+          "observed": "2 rows; missing 0: "
+        },
+        {
+          "covers": "HIS-03",
+          "statement": "Status=Failed: no row outside the filter is shown",
+          "verdict": "passed",
+          "expected": "0 unexpected rows",
+          "observed": "0 unexpected row(s)"
+        },
+        {
+          "covers": "HIS-03",
+          "statement": "Status=Failed: every matching transaction is shown",
+          "verdict": "passed",
+          "expected": "2 rows",
+          "observed": "2 rows; missing 0: "
+        },
+        {
+          "covers": "HIS-03",
+          "statement": "Account=Everyday Checking: no row outside the filter is shown",
+          "verdict": "passed",
+          "expected": "0 unexpected rows",
+          "observed": "0 unexpected row(s)"
+        },
+        {
+          "covers": "HIS-03",
+          "statement": "Account=Everyday Checking: every matching transaction is shown",
+          "verdict": "passed",
+          "expected": "8 rows",
+          "observed": "8 rows; missing 0: "
+        },
+        {
+          "covers": "HIS-03",
+          "statement": "Account=Rainy Day Savings: no row outside the filter is shown",
+          "verdict": "passed",
+          "expected": "0 unexpected rows",
+          "observed": "0 unexpected row(s)"
+        },
+        {
+          "covers": "HIS-03",
+          "statement": "Account=Rainy Day Savings: every matching transaction is shown",
+          "verdict": "passed",
+          "expected": "6 rows",
+          "observed": "6 rows; missing 0: "
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "HIS-FILTER-SINGLE last single filter",
+          "value": "screenshots/010-his-filter-single-last-single-filter.png"
+        }
+      ],
+      "error": "",
+      "duration_s": 3.5,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "HIS-FILTER-COMBO",
+      "title": "Combined filters (account + type + status + dates) intersect correctly",
+      "kind": "edge",
+      "anchors": [
+        "every displayed row must satisfy all selected filters"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Filter Account=Everyday Checking, Type=Withdrawal, Status=Completed, 2025-01-03..2025-04-10"
+      ],
+      "assertions": [
+        {
+          "covers": "HIS-03",
+          "statement": "Account+Type+Status+Dates: no row outside the filter is shown",
+          "verdict": "passed",
+          "expected": "0 unexpected rows",
+          "observed": "0 unexpected row(s)"
+        },
+        {
+          "covers": "HIS-03",
+          "statement": "Account+Type+Status+Dates: every matching transaction is shown",
+          "verdict": "passed",
+          "expected": "2 rows",
+          "observed": "2 rows; missing 0: "
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "HIS-FILTER-COMBO combined filter",
+          "value": "screenshots/011-his-filter-combo-combined-filter.png"
+        }
+      ],
+      "error": "",
+      "duration_s": 1.9,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "HIS-DATE-BOUNDARY",
+      "title": "Start and end dates are inclusive (including Pacific-time edge cases)",
+      "kind": "edge",
+      "anchors": [
+        "start and end dates are inclusive"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Filter dates: start = end = that day [2025-03-04 \u2192 2025-03-04] and look for Demo utilities (2025-03-05T02:45:00Z UTC = 2025-03-04 PT)",
+        "Filter dates: start = that day [2025-03-04 \u2192 \u2026] and look for Demo utilities (2025-03-05T02:45:00Z UTC = 2025-03-04 PT)",
+        "Filter dates: end = that day [\u2026 \u2192 2025-03-04] and look for Demo utilities (2025-03-05T02:45:00Z UTC = 2025-03-04 PT)",
+        "Filter dates: start = end = that day [2025-09-03 \u2192 2025-09-03] and look for Returned demo deposit (2025-09-03T14:50:00Z UTC = 2025-09-03 PT)",
+        "Filter dates: start = that day [2025-09-03 \u2192 \u2026] and look for Returned demo deposit (2025-09-03T14:50:00Z UTC = 2025-09-03 PT)",
+        "Filter dates: end = that day [\u2026 \u2192 2025-09-03] and look for Returned demo deposit (2025-09-03T14:50:00Z UTC = 2025-09-03 PT)",
+        "Filter dates: start = end = that day [2025-08-08 \u2192 2025-08-08] and look for Pending demo debit (2025-08-08T18:25:00Z UTC = 2025-08-08 PT)",
+        "Filter dates: start = that day [2025-08-08 \u2192 \u2026] and look for Pending demo debit (2025-08-08T18:25:00Z UTC = 2025-08-08 PT)",
+        "Filter dates: end = that day [\u2026 \u2192 2025-08-08] and look for Pending demo debit (2025-08-08T18:25:00Z UTC = 2025-08-08 PT)"
+      ],
+      "assertions": [
+        {
+          "covers": "HIS-04",
+          "statement": "start = end = that day: includes Demo utilities (2025-03-05T02:45:00Z UTC = 2025-03-04 PT)",
+          "verdict": "failed",
+          "expected": "transaction included",
+          "observed": "missing (0 rows shown)"
+        },
+        {
+          "covers": "HIS-04",
+          "statement": "start = that day: includes Demo utilities (2025-03-05T02:45:00Z UTC = 2025-03-04 PT)",
+          "verdict": "passed",
+          "expected": "transaction included",
+          "observed": "included"
+        },
+        {
+          "covers": "HIS-04",
+          "statement": "end = that day: includes Demo utilities (2025-03-05T02:45:00Z UTC = 2025-03-04 PT)",
+          "verdict": "failed",
+          "expected": "transaction included",
+          "observed": "missing (4 rows shown)"
+        },
+        {
+          "covers": "HIS-03",
+          "statement": "Single-day filter 2025-03-04 shows no other days",
+          "verdict": "passed",
+          "expected": "only 2025-03-04",
+          "observed": "0 row(s) from other days"
+        },
+        {
+          "covers": "HIS-04",
+          "statement": "start = end = that day: includes Returned demo deposit (2025-09-03T14:50:00Z UTC = 2025-09-03 PT)",
+          "verdict": "failed",
+          "expected": "transaction included",
+          "observed": "missing (0 rows shown)"
+        },
+        {
+          "covers": "HIS-04",
+          "statement": "start = that day: includes Returned demo deposit (2025-09-03T14:50:00Z UTC = 2025-09-03 PT)",
+          "verdict": "passed",
+          "expected": "transaction included",
+          "observed": "included"
+        },
+        {
+          "covers": "HIS-04",
+          "statement": "end = that day: includes Returned demo deposit (2025-09-03T14:50:00Z UTC = 2025-09-03 PT)",
+          "verdict": "failed",
+          "expected": "transaction included",
+          "observed": "missing (11 rows shown)"
+        },
+        {
+          "covers": "HIS-03",
+          "statement": "Single-day filter 2025-09-03 shows no other days",
+          "verdict": "passed",
+          "expected": "only 2025-09-03",
+          "observed": "0 row(s) from other days"
+        },
+        {
+          "covers": "HIS-04",
+          "statement": "start = end = that day: includes Pending demo debit (2025-08-08T18:25:00Z UTC = 2025-08-08 PT)",
+          "verdict": "failed",
+          "expected": "transaction included",
+          "observed": "missing (0 rows shown)"
+        },
+        {
+          "covers": "HIS-04",
+          "statement": "start = that day: includes Pending demo debit (2025-08-08T18:25:00Z UTC = 2025-08-08 PT)",
+          "verdict": "passed",
+          "expected": "transaction included",
+          "observed": "included"
+        },
+        {
+          "covers": "HIS-04",
+          "statement": "end = that day: includes Pending demo debit (2025-08-08T18:25:00Z UTC = 2025-08-08 PT)",
+          "verdict": "failed",
+          "expected": "transaction included",
+          "observed": "missing (10 rows shown)"
+        },
+        {
+          "covers": "HIS-03",
+          "statement": "Single-day filter 2025-08-08 shows no other days",
+          "verdict": "passed",
+          "expected": "only 2025-08-08",
+          "observed": "0 row(s) from other days"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "HIS-DATE-BOUNDARY boundary miss 2025-03-04 start = end = that day",
+          "value": "screenshots/012-his-date-boundary-boundary-miss-2025-03-04-start-e.png"
+        },
+        {
+          "kind": "screenshot",
+          "label": "HIS-DATE-BOUNDARY boundary miss 2025-03-04 end = that day",
+          "value": "screenshots/013-his-date-boundary-boundary-miss-2025-03-04-end-tha.png"
+        },
+        {
+          "kind": "screenshot",
+          "label": "HIS-DATE-BOUNDARY boundary miss 2025-09-03 start = end = that day",
+          "value": "screenshots/014-his-date-boundary-boundary-miss-2025-09-03-start-e.png"
+        },
+        {
+          "kind": "screenshot",
+          "label": "HIS-DATE-BOUNDARY boundary miss 2025-09-03 end = that day",
+          "value": "screenshots/015-his-date-boundary-boundary-miss-2025-09-03-end-tha.png"
+        },
+        {
+          "kind": "screenshot",
+          "label": "HIS-DATE-BOUNDARY boundary miss 2025-08-08 start = end = that day",
+          "value": "screenshots/016-his-date-boundary-boundary-miss-2025-08-08-start-e.png"
+        },
+        {
+          "kind": "screenshot",
+          "label": "HIS-DATE-BOUNDARY boundary miss 2025-08-08 end = that day",
+          "value": "screenshots/017-his-date-boundary-boundary-miss-2025-08-08-end-tha.png"
+        }
+      ],
+      "error": "",
+      "duration_s": 5.4,
+      "attempts": 1,
+      "verdict": "failed"
+    },
+    {
+      "id": "HIS-EMPTY",
+      "title": "A filter with no matches shows a clear empty state",
+      "kind": "edge",
+      "anchors": [
+        "clear empty state"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Filter a single day with no transactions (2023-11-30)"
+      ],
+      "assertions": [
+        {
+          "covers": "HIS-05",
+          "statement": "No rows are shown",
+          "verdict": "passed",
+          "expected": "0 rows",
+          "observed": "0 rows"
+        },
+        {
+          "covers": "HIS-05",
+          "statement": "An explicit empty-state message is shown, not an error",
+          "verdict": "passed",
+          "expected": "'No transactions match\u2026' style message, no error alert",
+          "observed": "alerts=0; text: 'usive and use Pacific Time.\\n\\nApply filters\\nClear filters\\nFiltered results\\nNo transactions match these filters\\n\\nTry a different combination, or clear the filters to see all transactions.\\n\\nClear filters'"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "HIS-EMPTY empty state",
+          "value": "screenshots/018-his-empty-empty-state.png"
+        }
+      ],
+      "error": "",
+      "duration_s": 1.9,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "HIS-CLEAR",
+      "title": "Clearing filters restores the full history",
+      "kind": "positive",
+      "anchors": [
+        "Clearing filters restores"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Apply Type=Deposit, Status=Completed, then click 'Clear filters'"
+      ],
+      "assertions": [
+        {
+          "covers": "HIS-06",
+          "statement": "After clearing, the unfiltered row set is back",
+          "verdict": "passed",
+          "expected": "12 rows",
+          "observed": "filtered 3 \u2192 cleared 12"
+        },
+        {
+          "covers": "HIS-06",
+          "statement": "All filter controls are reset",
+          "verdict": "passed",
+          "expected": "all controls empty",
+          "observed": "['', '', '', '', '']"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "HIS-CLEAR after clear",
+          "value": "screenshots/019-his-clear-after-clear.png"
+        }
+      ],
+      "error": "",
+      "duration_s": 2.3,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "HIS-DATE-INVERTED",
+      "title": "Start date after end date gives a clear message (no misleading rows)",
+      "kind": "negative",
+      "anchors": [
+        "communicate loading, success, validation, and failure states"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Filter with start 2025-06-30 and end 2025-01-01"
+      ],
+      "assertions": [
+        {
+          "covers": "UI-02",
+          "statement": "Inverted range shows no transactions",
+          "verdict": "passed",
+          "expected": "0 rows",
+          "observed": "0 rows"
+        },
+        {
+          "covers": "UI-02",
+          "statement": "Inverted range explains the problem clearly",
+          "verdict": "passed",
+          "expected": "Tell the user the start date must not be after the end date",
+          "observed": "We couldn't load transactions\n\nStart date must not be after end date.\n\nTry again\nBack to dashboard \u2014 heuristic: specific message mentioning the problem (heuristic)"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "HIS-DATE-INVERTED inverted dates",
+          "value": "screenshots/020-his-date-inverted-inverted-dates.png"
+        }
+      ],
+      "error": "",
+      "duration_s": 1.9,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "PRF-VIEW",
+      "title": "Profile shows display name and a masked email only",
+      "kind": "positive",
+      "anchors": [
+        "profile view displays only synthetic demo-customer details"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'"
+      ],
+      "assertions": [
+        {
+          "covers": "PRF-01",
+          "statement": "Display name is shown",
+          "verdict": "passed",
+          "expected": "Avery Demo",
+          "observed": "PROFILE\n\nYour profile\nDemo customer details\nDisplay name\nAvery Demo\nEmail\na***@example.test\n\nThese are synthetic demo details. DemoBank never stores real identity information."
+        },
+        {
+          "covers": "PRF-01",
+          "statement": "Email address is masked",
+          "verdict": "passed",
+          "expected": "e.g. a***@example.test",
+          "observed": "['a***@example.test']"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "PRF-VIEW profile",
+          "value": "screenshots/021-prf-view-profile.png"
+        }
+      ],
+      "error": "",
+      "duration_s": 1.6,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "PRF-SECRETS",
+      "title": "No passwords, tokens or full account numbers leak into the page or storage",
+      "kind": "negative",
+      "anchors": [
+        "must not reveal passwords, authentication tokens"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'"
+      ],
+      "assertions": [
+        {
+          "covers": "PRF-02",
+          "statement": "No secrets in page, web storage or readable cookies",
+          "verdict": "passed",
+          "expected": "no tokens/passwords/full numbers",
+          "observed": "clean"
+        },
+        {
+          "covers": "PRF-02",
+          "statement": "Profile API response carries no secrets",
+          "verdict": "passed",
+          "expected": "no secret-looking fields",
+          "observed": "clean"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "value",
+          "label": "Browser storage snapshot",
+          "value": "{\"l\":{},\"s\":{},\"c\":\"\"}"
+        },
+        {
+          "kind": "network",
+          "label": "GET /api/me",
+          "value": "GET http://localhost:8000/api/me -> 200\n{\"id\":\"00000000-0000-0000-0000-000000000001\",\"display_name\":\"Avery Demo\",\"masked_email\":\"a***@example.test\"}"
+        }
+      ],
+      "error": "",
+      "duration_s": 1.6,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "TRF-FORM",
+      "title": "Transfer form has source, destination, amount and optional memo",
+      "kind": "positive",
+      "anchors": [
+        "form includes source account"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'"
+      ],
+      "assertions": [
+        {
+          "covers": "TRF-02",
+          "statement": "Form exposes labelled source, destination, amount and memo fields",
+          "verdict": "passed",
+          "expected": "4 labelled fields",
+          "observed": "{'source': True, 'destination': True, 'amount': True, 'memo': True}"
+        },
+        {
+          "covers": "TRF-02",
+          "statement": "Memo is marked optional",
+          "verdict": "passed",
+          "expected": "'optional' on memo label",
+          "observed": "Memo (optional)"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "TRF-FORM transfer form",
+          "value": "screenshots/022-trf-form-transfer-form.png"
+        }
+      ],
+      "error": "",
+      "duration_s": 1.7,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "TRF-VALID",
+      "title": "Valid transfer with memo: balances, records, histories and refresh all agree",
+      "kind": "positive",
+      "anchors": [
+        "valid transfer is atomic"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Transfer form: from 'Everyday Checking' to 'Rainy Day Savings', amount '1.37', memo 'QA-192644-TRF-VALID-valid1' -> submit",
+        "Refresh the dashboard and the history page"
+      ],
+      "assertions": [
+        {
+          "covers": "TRF-01",
+          "statement": "User can transfer Everyday Checking \u2192 Rainy Day Savings",
+          "verdict": "passed",
+          "expected": "transfer completes",
+          "observed": "SUCCESS shown; API 201; messages: Transfer complete Amount $1.37 From Everyday Checking (\u2022\u2022\u2022\u2022 1042) To Rainy Day Savings (\u2022\u2022\u2022\u2022 7781) Date & time Oct 19, 2026, 4:27 PM PDT Memo QA-192644-TRF-VALI"
+        },
+        {
+          "covers": "TRF-08",
+          "statement": "Success is shown and the backend confirms the commit",
+          "verdict": "passed",
+          "expected": "'Transfer complete' + HTTP 201 + record exists",
+          "observed": "SUCCESS shown; API 201; messages: Transfer complete Amount $1.37 From Everyday Checking (\u2022\u2022\u2022\u2022 1042) To Rainy Day Savings (\u2022\u2022\u2022\u2022 7781) Date & time Oct 19, 2026, 4:27 PM PDT Memo QA-192644-TRF-VALI; records with memo: 1"
+        },
+        {
+          "covers": "TRF-06",
+          "statement": "Source decreases and destination increases by exactly the amount",
+          "verdict": "passed",
+          "expected": "Everyday Checking \u22121.37, Rainy Day Savings +1.37",
+          "observed": "Everyday Checking -1.37, Rainy Day Savings +1.37"
+        },
+        {
+          "covers": "TRF-08",
+          "statement": "Receipt shows amount, source, destination and memo",
+          "verdict": "passed",
+          "expected": "all four in receipt",
+          "observed": "Transfer complete\nAmount\n$1.37\nFrom\nEveryday Checking (\u2022\u2022\u2022\u2022 1042)\nTo\nRainy Day Savings (\u2022\u2022\u2022\u2022 7781)\nDate & time\nOct 19, 2026, 4:27 PM PDT\nMemo\nQA-192644-TRF-VALID-valid1\nNew Everyday Checking balance\n$4,368.38\nNew Rainy Day Savings balance\n$8,276.37\nView Everyday Checking history\nView Rainy Day Savin"
+        },
+        {
+          "covers": "TRF-07",
+          "statement": "Exactly one completed transfer record was created",
+          "verdict": "passed",
+          "expected": "1 \u00d7 transfer/completed/$1.37",
+          "observed": "transfer/completed/$1.37"
+        },
+        {
+          "covers": "TRF-07",
+          "statement": "Everyday Checking history shows the transfer once as \u2212$1.37",
+          "verdict": "passed",
+          "expected": "1 row, \u2212$1.37, Completed",
+          "observed": "1 row(s); amount 'Money out:\\n\u2212$1.37'"
+        },
+        {
+          "covers": "TRF-07",
+          "statement": "Rainy Day Savings history shows the transfer once as +$1.37",
+          "verdict": "passed",
+          "expected": "1 row, +$1.37, Completed",
+          "observed": "1 row(s); amount 'Money in:\\n+$1.37'"
+        },
+        {
+          "covers": "TRF-07",
+          "statement": "Combined history row shows amount, date/time, source, destination, status and memo",
+          "verdict": "passed",
+          "expected": "all fields present",
+          "observed": "{'date & time': 'Oct 19, 2026, 4:27 PM PDT', 'description': 'QA-192644-TRF-VALID-valid1', 'type': 'Transfer', 'account': 'From Everyday Checking (\u2022\u2022\u2022\u2022 1042)\\nTo Rainy Day Savings (\u2022\u2022\u2022\u2022 7781)', 'amount': 'Moved between accounts:\\n$1.37', 'status': 'Completed'}"
+        },
+        {
+          "covers": "DSH-05",
+          "statement": "Dashboard balances reflect the transfer",
+          "verdict": "passed",
+          "expected": "{'Everyday Checking': '$4368.38', 'Rainy Day Savings': '$8276.37'}",
+          "observed": "{'Everyday Checking': Decimal('4368.38'), 'Rainy Day Savings': Decimal('8276.37')}"
+        },
+        {
+          "covers": "TRF-09",
+          "statement": "After refresh, balances and the record persist",
+          "verdict": "passed",
+          "expected": "balances {'Everyday Checking': Decimal('4368.38'), 'Rainy Day Savings': Decimal('8276.37')}, record present",
+          "observed": "balances {'Everyday Checking': Decimal('4368.38'), 'Rainy Day Savings': Decimal('8276.37')}, record present=True"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "TRF-VALID receipt",
+          "value": "screenshots/023-trf-valid-receipt.png"
+        },
+        {
+          "kind": "value",
+          "label": "UI outcome",
+          "value": "SUCCESS shown; API 201; messages: Transfer complete Amount $1.37 From Everyday Checking (\u2022\u2022\u2022\u2022 1042) To Rainy Day Savings (\u2022\u2022\u2022\u2022 7781) Date & time Oct 19, 2026, 4:27 PM PDT Memo QA-192644-TRF-VALI"
+        },
+        {
+          "kind": "screenshot",
+          "label": "TRF-VALID dashboard after transfer",
+          "value": "screenshots/024-trf-valid-dashboard-after-transfer.png"
+        },
+        {
+          "kind": "note",
+          "label": "Test hygiene",
+          "value": "compensating transfer 1.37 Rainy Day Savings -> Everyday Checking: HTTP 201"
+        }
+      ],
+      "error": "",
+      "duration_s": 6.4,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "TRF-VALID-NOMEMO",
+      "title": "Valid transfer without memo (memo is optional), savings \u2192 checking",
+      "kind": "positive",
+      "anchors": [
+        "optional memo"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Transfer form: from 'Rainy Day Savings' to 'Everyday Checking', amount '2.05', memo '' -> submit"
+      ],
+      "assertions": [
+        {
+          "covers": "TRF-02",
+          "statement": "Transfer without memo succeeds",
+          "verdict": "passed",
+          "expected": "success + 1 record",
+          "observed": "SUCCESS shown; API 201; messages: Transfer complete Amount $2.05 From Rainy Day Savings (\u2022\u2022\u2022\u2022 7781) To Everyday Checking (\u2022\u2022\u2022\u2022 1042) Date & time Oct 19, 2026, 4:27 PM PDT New Rainy Day Savings b"
+        },
+        {
+          "covers": "TRF-01",
+          "statement": "User can transfer Rainy Day Savings \u2192 Everyday Checking",
+          "verdict": "passed",
+          "expected": "transfer completes",
+          "observed": "SUCCESS shown; API 201; messages: Transfer complete Amount $2.05 From Rainy Day Savings (\u2022\u2022\u2022\u2022 7781) To Everyday Checking (\u2022\u2022\u2022\u2022 1042) Date & time Oct 19, 2026, 4:27 PM PDT New Rainy Day Savings b"
+        },
+        {
+          "covers": "TRF-06",
+          "statement": "Savings \u2192 checking moves exactly the amount",
+          "verdict": "passed",
+          "expected": "\u22122.05/+2.05",
+          "observed": "-2.05/+2.05"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "TRF-VALID-NOMEMO no memo receipt",
+          "value": "screenshots/025-trf-valid-nomemo-no-memo-receipt.png"
+        },
+        {
+          "kind": "note",
+          "label": "Test hygiene",
+          "value": "compensating transfer 2.05 Everyday Checking -> Rainy Day Savings: HTTP 201"
+        }
+      ],
+      "error": "",
+      "duration_s": 2.1,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "TRF-MIN",
+      "title": "Smallest valid amount ($0.01) is accepted and moved exactly",
+      "kind": "edge",
+      "anchors": [
+        "no more than two digits after the decimal point"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Transfer form: from 'Everyday Checking' to 'Rainy Day Savings', amount '0.01', memo 'QA-192644-TRF-MIN-min1' -> submit"
+      ],
+      "assertions": [
+        {
+          "covers": "TRF-04",
+          "statement": "$0.01 (two decimals) is accepted",
+          "verdict": "passed",
+          "expected": "success",
+          "observed": "SUCCESS shown; API 201; messages: Transfer complete Amount $0.01 From Everyday Checking (\u2022\u2022\u2022\u2022 1042) To Rainy Day Savings (\u2022\u2022\u2022\u2022 7781) Date & time Oct 19, 2026, 4:27 PM PDT Memo QA-192644-TRF-MIN-"
+        },
+        {
+          "covers": "TRF-06",
+          "statement": "$0.01 moves exactly one cent",
+          "verdict": "passed",
+          "expected": "\u22120.01/+0.01",
+          "observed": "-0.01/+0.01"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "note",
+          "label": "Test hygiene",
+          "value": "compensating transfer 0.01 Rainy Day Savings -> Everyday Checking: HTTP 201"
+        }
+      ],
+      "error": "",
+      "duration_s": 2.0,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "TRF-EXACT-BALANCE",
+      "title": "Transferring exactly the full available balance is allowed",
+      "kind": "edge",
+      "anchors": [
+        "must not exceed the source account's available balance"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Transfer form: from 'Everyday Checking' to 'Rainy Day Savings', amount '4369.75', memo 'QA-192644-TRF-EXACT-BALANCE-full1' -> submit"
+      ],
+      "assertions": [
+        {
+          "covers": "TRF-05",
+          "statement": "Amount equal to the balance ($4369.75) is accepted and leaves $0.00",
+          "verdict": "passed",
+          "expected": "success, source = $0.00",
+          "observed": "SUCCESS shown; API 201; messages: Transfer complete Amount $4,369.75 From Everyday Checking (\u2022\u2022\u2022\u2022 1042) To Rainy Day Savings (\u2022\u2022\u2022\u2022 7781) Date & time Oct 19, 2026, 4:27 PM PDT Memo QA-192644-TRF-; source now $0.00"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "TRF-EXACT-BALANCE exact balance",
+          "value": "screenshots/026-trf-exact-balance-exact-balance.png"
+        },
+        {
+          "kind": "note",
+          "label": "Test hygiene",
+          "value": "compensating transfer 4369.75 Rainy Day Savings -> Everyday Checking: HTTP 201"
+        }
+      ],
+      "error": "",
+      "duration_s": 2.1,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "TRF-OVERDRAFT",
+      "title": "Amount one cent above the available balance is rejected",
+      "kind": "negative",
+      "anchors": [
+        "If funds are insufficient"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Transfer form: from 'Everyday Checking' to 'Rainy Day Savings', amount '4369.76', memo 'QA-192644-TRF-OVERDRAFT-over1' -> submit"
+      ],
+      "assertions": [
+        {
+          "covers": "TRF-05",
+          "statement": "amount $4369.76 (balance + $0.01): the transfer is rejected",
+          "verdict": "failed",
+          "expected": "validation/error message, no success",
+          "observed": "SUCCESS shown; API 201; messages: Transfer complete Amount $4,369.76 From Everyday Checking (\u2022\u2022\u2022\u2022 1042) To Rainy Day Savings (\u2022\u2022\u2022\u2022 7781) Date & time Oct 19, 2026, 4:27 PM PDT Memo QA-192644-TRF-"
+        },
+        {
+          "covers": "TRF-08",
+          "statement": "amount $4369.76 (balance + $0.01): no success state is shown",
+          "verdict": "failed",
+          "expected": "no 'Transfer complete'",
+          "observed": "SUCCESS shown; API 201; messages: Transfer complete Amount $4,369.76 From Everyday Checking (\u2022\u2022\u2022\u2022 1042) To Rainy Day Savings (\u2022\u2022\u2022\u2022 7781) Date & time Oct 19, 2026, 4:27 PM PDT Memo QA-192644-TRF-"
+        },
+        {
+          "covers": "TRF-05",
+          "statement": "Insufficient funds: balances are unchanged",
+          "verdict": "failed",
+          "expected": "both balances unchanged",
+          "observed": "{'Everyday Checking': '$4369.75 \u2192 $-0.01', 'Rainy Day Savings': '$8275.00 \u2192 $12644.76'}"
+        },
+        {
+          "covers": "TRF-05",
+          "statement": "Insufficient funds: no transaction record is created",
+          "verdict": "failed",
+          "expected": "0 new records",
+          "observed": "transfer completed $4369.76"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "TRF-OVERDRAFT overdraft attempt",
+          "value": "screenshots/027-trf-overdraft-overdraft-attempt.png"
+        },
+        {
+          "kind": "value",
+          "label": "UI outcome",
+          "value": "SUCCESS shown; API 201; messages: Transfer complete Amount $4,369.76 From Everyday Checking (\u2022\u2022\u2022\u2022 1042) To Rainy Day Savings (\u2022\u2022\u2022\u2022 7781) Date & time Oct 19, 2026, 4:27 PM PDT Memo QA-192644-TRF-"
+        },
+        {
+          "kind": "value",
+          "label": "POST /api/transfers response",
+          "value": "HTTP 201: {\"transaction\":{\"id\":\"2a27c6a7-a3dd-4a35-b180-5b7cd05e3229\",\"type\":\"transfer\",\"status\":\"completed\",\"amount\":\"4369.76\",\"memo\":\"QA-192644-TRF-OVERDRAFT-over1\",\"occurred_at\":\"2026-10-19T23:27:43.289547Z\",\"source_account\":{\"id\":\"00000000-0000-0000-0000-000000000101\",\"name\":\"Everyday Checking\",\"masked_number\":\"\u2022\u2022\u2022\u2022 1042\"},\"destination_account\":{\"id\":\"00000000-0000-0000-0000-000000000102\",\"name\":\"Rainy "
+        },
+        {
+          "kind": "value",
+          "label": "Overdrawn balance",
+          "value": "Everyday Checking is now $-0.01"
+        },
+        {
+          "kind": "note",
+          "label": "Test hygiene",
+          "value": "compensating transfer 4369.76 Rainy Day Savings -> Everyday Checking: HTTP 201"
+        }
+      ],
+      "error": "",
+      "duration_s": 2.1,
+      "attempts": 1,
+      "verdict": "failed"
+    },
+    {
+      "id": "TRF-SAME",
+      "title": "Same source and destination account is rejected",
+      "kind": "negative",
+      "anchors": [
+        "Same-account transfers must be rejected"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Transfer form: from 'Everyday Checking' to 'Everyday Checking', amount '5.00', memo 'QA-192644-TRF-SAME-same1' -> submit"
+      ],
+      "assertions": [
+        {
+          "covers": "TRF-03",
+          "statement": "the same account as source and destination: the transfer is rejected",
+          "verdict": "passed",
+          "expected": "validation/error message, no success",
+          "observed": "rejected; API 422; messages: Source and destination accounts must be different. | Transfer not completed  Source and destination accounts must be different.  No money was moved. Your balances are unchanged."
+        },
+        {
+          "covers": "TRF-08",
+          "statement": "the same account as source and destination: no success state is shown",
+          "verdict": "passed",
+          "expected": "no 'Transfer complete'",
+          "observed": "rejected; API 422; messages: Source and destination accounts must be different. | Transfer not completed  Source and destination accounts must be different.  No money was moved. Your balances are unchanged."
+        },
+        {
+          "covers": "TRF-03",
+          "statement": "the same account as source and destination: the message explains the problem",
+          "verdict": "passed",
+          "expected": "Explain that source and destination must be different accounts",
+          "observed": "Transfer not completed\n\nSource and destination accounts must be different.\n\nNo money was moved. Your balances are unchanged. | Source and destination accounts must be different. \u2014 heuristic: specific message mentioning the problem (heuristic)"
+        },
+        {
+          "covers": "TRF-03",
+          "statement": "Same-account transfer: balances are unchanged",
+          "verdict": "passed",
+          "expected": "both balances unchanged",
+          "observed": "unchanged"
+        },
+        {
+          "covers": "TRF-03",
+          "statement": "Same-account transfer: no transaction record is created",
+          "verdict": "passed",
+          "expected": "0 new records",
+          "observed": "none"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "TRF-SAME same account",
+          "value": "screenshots/028-trf-same-same-account.png"
+        },
+        {
+          "kind": "value",
+          "label": "UI outcome",
+          "value": "rejected; API 422; messages: Source and destination accounts must be different. | Transfer not completed  Source and destination accounts must be different.  No money was moved. Your balances are unchanged."
+        },
+        {
+          "kind": "value",
+          "label": "POST /api/transfers response",
+          "value": "HTTP 422: {\"error\":{\"code\":\"same_account\",\"message\":\"Source and destination accounts must be different.\"}}"
+        },
+        {
+          "kind": "note",
+          "label": "Test hygiene",
+          "value": "no drift"
+        }
+      ],
+      "error": "",
+      "duration_s": 2.1,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "TRF-AMT-BLANK",
+      "title": "Reject a blank amount",
+      "kind": "negative",
+      "anchors": [
+        "positive number greater than zero"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Transfer form: from 'Everyday Checking' to 'Rainy Day Savings', amount '', memo 'QA-192644-TRF-AMT-BLANK-amt1' -> submit"
+      ],
+      "assertions": [
+        {
+          "covers": "TRF-04",
+          "statement": "a blank amount: the transfer is rejected",
+          "verdict": "passed",
+          "expected": "validation/error message, no success",
+          "observed": "rejected; no API request; messages: Enter an amount to transfer. | Up to two decimal places, for example 25.00."
+        },
+        {
+          "covers": "TRF-08",
+          "statement": "a blank amount: no success state is shown",
+          "verdict": "passed",
+          "expected": "no 'Transfer complete'",
+          "observed": "rejected; no API request; messages: Enter an amount to transfer. | Up to two decimal places, for example 25.00."
+        },
+        {
+          "covers": "TRF-04",
+          "statement": "a blank amount: the message explains the problem",
+          "verdict": "passed",
+          "expected": "Explain what a valid amount is (positive, max two decimals)",
+          "observed": "Enter an amount to transfer. \u2014 heuristic: specific message mentioning the problem (heuristic)"
+        },
+        {
+          "covers": "TRF-04",
+          "statement": "A blank amount: balances are unchanged",
+          "verdict": "passed",
+          "expected": "both balances unchanged",
+          "observed": "unchanged"
+        },
+        {
+          "covers": "TRF-04",
+          "statement": "A blank amount: no transaction record is created",
+          "verdict": "passed",
+          "expected": "0 new records",
+          "observed": "none"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "TRF-AMT-BLANK amount a blank amount",
+          "value": "screenshots/029-trf-amt-blank-amount-a-blank-amount.png"
+        },
+        {
+          "kind": "value",
+          "label": "UI outcome",
+          "value": "rejected; no API request; messages: Enter an amount to transfer. | Up to two decimal places, for example 25.00."
+        },
+        {
+          "kind": "note",
+          "label": "Test hygiene",
+          "value": "no drift"
+        }
+      ],
+      "error": "",
+      "duration_s": 2.1,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "TRF-AMT-NAN",
+      "title": "Reject a non-numeric amount ('abc')",
+      "kind": "negative",
+      "anchors": [
+        "positive number greater than zero"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Transfer form: from 'Everyday Checking' to 'Rainy Day Savings', amount 'abc', memo 'QA-192644-TRF-AMT-NAN-amt1' -> submit"
+      ],
+      "assertions": [
+        {
+          "covers": "TRF-04",
+          "statement": "a non-numeric amount ('abc'): the transfer is rejected",
+          "verdict": "passed",
+          "expected": "validation/error message, no success",
+          "observed": "rejected; API 422; messages: Amount must be a decimal string with no more than two decimal places. | Transfer not completed  Amount must be a decimal string with no more than two decimal places.  No money was moved. Your balances are unchanged. | Up to two decimal places, for example 25.00."
+        },
+        {
+          "covers": "TRF-08",
+          "statement": "a non-numeric amount ('abc'): no success state is shown",
+          "verdict": "passed",
+          "expected": "no 'Transfer complete'",
+          "observed": "rejected; API 422; messages: Amount must be a decimal string with no more than two decimal places. | Transfer not completed  Amount must be a decimal string with no more than two decimal places.  No money was moved. Your balances are unchanged. | Up to two decimal places, for example 25.00."
+        },
+        {
+          "covers": "TRF-04",
+          "statement": "a non-numeric amount ('abc'): the message explains the problem",
+          "verdict": "passed",
+          "expected": "Explain what a valid amount is (positive, max two decimals)",
+          "observed": "Transfer not completed\n\nAmount must be a decimal string with no more than two decimal places.\n\nNo money was moved. Your balances are unchanged. | Amount must be a decimal string with no more than two decimal places. \u2014 heuristic: specific message mentioning the problem (heuristic)"
+        },
+        {
+          "covers": "TRF-04",
+          "statement": "A non-numeric amount ('abc'): balances are unchanged",
+          "verdict": "passed",
+          "expected": "both balances unchanged",
+          "observed": "unchanged"
+        },
+        {
+          "covers": "TRF-04",
+          "statement": "A non-numeric amount ('abc'): no transaction record is created",
+          "verdict": "passed",
+          "expected": "0 new records",
+          "observed": "none"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "TRF-AMT-NAN amount a non-numeric amount ('abc')",
+          "value": "screenshots/030-trf-amt-nan-amount-a-non-numeric-amount-abc.png"
+        },
+        {
+          "kind": "value",
+          "label": "UI outcome",
+          "value": "rejected; API 422; messages: Amount must be a decimal string with no more than two decimal places. | Transfer not completed  Amount must be a decimal string with no more than two decimal places.  No money was moved. Your balances are unchanged. | Up to two decimal places, for example 25.00."
+        },
+        {
+          "kind": "value",
+          "label": "POST /api/transfers response",
+          "value": "HTTP 422: {\"error\":{\"code\":\"invalid_amount\",\"message\":\"Amount must be a decimal string with no more than two decimal places.\"}}"
+        },
+        {
+          "kind": "note",
+          "label": "Test hygiene",
+          "value": "no drift"
+        }
+      ],
+      "error": "",
+      "duration_s": 2.2,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "TRF-AMT-NEG",
+      "title": "Reject a negative amount ('-5.00')",
+      "kind": "negative",
+      "anchors": [
+        "positive number greater than zero"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Transfer form: from 'Everyday Checking' to 'Rainy Day Savings', amount '-5.00', memo 'QA-192644-TRF-AMT-NEG-amt1' -> submit"
+      ],
+      "assertions": [
+        {
+          "covers": "TRF-04",
+          "statement": "a negative amount ('-5.00'): the transfer is rejected",
+          "verdict": "failed",
+          "expected": "validation/error message, no success",
+          "observed": "SUCCESS shown; API 201; messages: Transfer complete Amount \u2212$5.00 From Everyday Checking (\u2022\u2022\u2022\u2022 1042) To Rainy Day Savings (\u2022\u2022\u2022\u2022 7781) Date & time Oct 19, 2026, 4:27 PM PDT Memo QA-192644-TRF-AMT"
+        },
+        {
+          "covers": "TRF-08",
+          "statement": "a negative amount ('-5.00'): no success state is shown",
+          "verdict": "failed",
+          "expected": "no 'Transfer complete'",
+          "observed": "SUCCESS shown; API 201; messages: Transfer complete Amount \u2212$5.00 From Everyday Checking (\u2022\u2022\u2022\u2022 1042) To Rainy Day Savings (\u2022\u2022\u2022\u2022 7781) Date & time Oct 19, 2026, 4:27 PM PDT Memo QA-192644-TRF-AMT"
+        },
+        {
+          "covers": "TRF-04",
+          "statement": "A negative amount ('-5.00'): balances are unchanged",
+          "verdict": "failed",
+          "expected": "both balances unchanged",
+          "observed": "{'Everyday Checking': '$4369.75 \u2192 $4374.75', 'Rainy Day Savings': '$8275.00 \u2192 $8270.00'}"
+        },
+        {
+          "covers": "TRF-04",
+          "statement": "A negative amount ('-5.00'): no transaction record is created",
+          "verdict": "failed",
+          "expected": "0 new records",
+          "observed": "transfer completed $-5.00"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "TRF-AMT-NEG amount a negative amount ('-5.00')",
+          "value": "screenshots/031-trf-amt-neg-amount-a-negative-amount-5-00.png"
+        },
+        {
+          "kind": "value",
+          "label": "UI outcome",
+          "value": "SUCCESS shown; API 201; messages: Transfer complete Amount \u2212$5.00 From Everyday Checking (\u2022\u2022\u2022\u2022 1042) To Rainy Day Savings (\u2022\u2022\u2022\u2022 7781) Date & time Oct 19, 2026, 4:27 PM PDT Memo QA-192644-TRF-AMT"
+        },
+        {
+          "kind": "value",
+          "label": "POST /api/transfers response",
+          "value": "HTTP 201: {\"transaction\":{\"id\":\"0c21e803-6c48-4821-9cf2-850ef96456ad\",\"type\":\"transfer\",\"status\":\"completed\",\"amount\":\"-5.00\",\"memo\":\"QA-192644-TRF-AMT-NEG-amt1\",\"occurred_at\":\"2026-10-19T23:27:51.812323Z\",\"source_account\":{\"id\":\"00000000-0000-0000-0000-000000000101\",\"name\":\"Everyday Checking\",\"masked_number\":\"\u2022\u2022\u2022\u2022 1042\"},\"destination_account\":{\"id\":\"00000000-0000-0000-0000-000000000102\",\"name\":\"Rainy Day S"
+        },
+        {
+          "kind": "note",
+          "label": "Test hygiene",
+          "value": "compensating transfer 5.00 Everyday Checking -> Rainy Day Savings: HTTP 201"
+        }
+      ],
+      "error": "",
+      "duration_s": 2.1,
+      "attempts": 1,
+      "verdict": "failed"
+    },
+    {
+      "id": "TRF-AMT-PREC",
+      "title": "Reject three decimal places ('1.234')",
+      "kind": "edge",
+      "anchors": [
+        "positive number greater than zero"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Transfer form: from 'Everyday Checking' to 'Rainy Day Savings', amount '1.234', memo 'QA-192644-TRF-AMT-PREC-amt1' -> submit"
+      ],
+      "assertions": [
+        {
+          "covers": "TRF-04",
+          "statement": "three decimal places ('1.234'): the transfer is rejected",
+          "verdict": "passed",
+          "expected": "validation/error message, no success",
+          "observed": "rejected; API 422; messages: Amount must be a decimal string with no more than two decimal places. | Transfer not completed  Amount must be a decimal string with no more than two decimal places.  No money was moved. Your balances are unchanged. | Up to two decimal places, for example 25.00."
+        },
+        {
+          "covers": "TRF-08",
+          "statement": "three decimal places ('1.234'): no success state is shown",
+          "verdict": "passed",
+          "expected": "no 'Transfer complete'",
+          "observed": "rejected; API 422; messages: Amount must be a decimal string with no more than two decimal places. | Transfer not completed  Amount must be a decimal string with no more than two decimal places.  No money was moved. Your balances are unchanged. | Up to two decimal places, for example 25.00."
+        },
+        {
+          "covers": "TRF-04",
+          "statement": "three decimal places ('1.234'): the message explains the problem",
+          "verdict": "passed",
+          "expected": "Explain what a valid amount is (positive, max two decimals)",
+          "observed": "Transfer not completed\n\nAmount must be a decimal string with no more than two decimal places.\n\nNo money was moved. Your balances are unchanged. | Amount must be a decimal string with no more than two decimal places. \u2014 heuristic: specific message mentioning the problem (heuristic)"
+        },
+        {
+          "covers": "TRF-04",
+          "statement": "Three decimal places ('1.234'): balances are unchanged",
+          "verdict": "passed",
+          "expected": "both balances unchanged",
+          "observed": "unchanged"
+        },
+        {
+          "covers": "TRF-04",
+          "statement": "Three decimal places ('1.234'): no transaction record is created",
+          "verdict": "passed",
+          "expected": "0 new records",
+          "observed": "none"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "TRF-AMT-PREC amount three decimal places ('1.234')",
+          "value": "screenshots/032-trf-amt-prec-amount-three-decimal-places-1-234.png"
+        },
+        {
+          "kind": "value",
+          "label": "UI outcome",
+          "value": "rejected; API 422; messages: Amount must be a decimal string with no more than two decimal places. | Transfer not completed  Amount must be a decimal string with no more than two decimal places.  No money was moved. Your balances are unchanged. | Up to two decimal places, for example 25.00."
+        },
+        {
+          "kind": "value",
+          "label": "POST /api/transfers response",
+          "value": "HTTP 422: {\"error\":{\"code\":\"invalid_amount\",\"message\":\"Amount must be a decimal string with no more than two decimal places.\"}}"
+        },
+        {
+          "kind": "note",
+          "label": "Test hygiene",
+          "value": "no drift"
+        }
+      ],
+      "error": "",
+      "duration_s": 2.2,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "TRF-AMT-SCI",
+      "title": "Reject scientific notation ('1e2')",
+      "kind": "edge",
+      "anchors": [
+        "positive number greater than zero"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Transfer form: from 'Everyday Checking' to 'Rainy Day Savings', amount '1e2', memo 'QA-192644-TRF-AMT-SCI-amt1' -> submit"
+      ],
+      "assertions": [
+        {
+          "covers": "TRF-04",
+          "statement": "scientific notation ('1e2'): the transfer is rejected",
+          "verdict": "passed",
+          "expected": "validation/error message, no success",
+          "observed": "rejected; API 422; messages: Amount must be a decimal string with no more than two decimal places. | Transfer not completed  Amount must be a decimal string with no more than two decimal places.  No money was moved. Your balances are unchanged. | Up to two decimal places, for example 25.00."
+        },
+        {
+          "covers": "TRF-08",
+          "statement": "scientific notation ('1e2'): no success state is shown",
+          "verdict": "passed",
+          "expected": "no 'Transfer complete'",
+          "observed": "rejected; API 422; messages: Amount must be a decimal string with no more than two decimal places. | Transfer not completed  Amount must be a decimal string with no more than two decimal places.  No money was moved. Your balances are unchanged. | Up to two decimal places, for example 25.00."
+        },
+        {
+          "covers": "TRF-04",
+          "statement": "scientific notation ('1e2'): the message explains the problem",
+          "verdict": "passed",
+          "expected": "Explain what a valid amount is (positive, max two decimals)",
+          "observed": "Transfer not completed\n\nAmount must be a decimal string with no more than two decimal places.\n\nNo money was moved. Your balances are unchanged. | Amount must be a decimal string with no more than two decimal places. \u2014 heuristic: specific message mentioning the problem (heuristic)"
+        },
+        {
+          "covers": "TRF-04",
+          "statement": "Scientific notation ('1e2'): balances are unchanged",
+          "verdict": "passed",
+          "expected": "both balances unchanged",
+          "observed": "unchanged"
+        },
+        {
+          "covers": "TRF-04",
+          "statement": "Scientific notation ('1e2'): no transaction record is created",
+          "verdict": "passed",
+          "expected": "0 new records",
+          "observed": "none"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "TRF-AMT-SCI amount scientific notation ('1e2')",
+          "value": "screenshots/033-trf-amt-sci-amount-scientific-notation-1e2.png"
+        },
+        {
+          "kind": "value",
+          "label": "UI outcome",
+          "value": "rejected; API 422; messages: Amount must be a decimal string with no more than two decimal places. | Transfer not completed  Amount must be a decimal string with no more than two decimal places.  No money was moved. Your balances are unchanged. | Up to two decimal places, for example 25.00."
+        },
+        {
+          "kind": "value",
+          "label": "POST /api/transfers response",
+          "value": "HTTP 422: {\"error\":{\"code\":\"invalid_amount\",\"message\":\"Amount must be a decimal string with no more than two decimal places.\"}}"
+        },
+        {
+          "kind": "note",
+          "label": "Test hygiene",
+          "value": "no drift"
+        }
+      ],
+      "error": "",
+      "duration_s": 2.2,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "TRF-AMT-SPACE",
+      "title": "Reject whitespace only",
+      "kind": "edge",
+      "anchors": [
+        "positive number greater than zero"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Transfer form: from 'Everyday Checking' to 'Rainy Day Savings', amount '   ', memo 'QA-192644-TRF-AMT-SPACE-amt1' -> submit"
+      ],
+      "assertions": [
+        {
+          "covers": "TRF-04",
+          "statement": "whitespace only: the transfer is rejected",
+          "verdict": "passed",
+          "expected": "validation/error message, no success",
+          "observed": "rejected; no API request; messages: Enter an amount to transfer. | Up to two decimal places, for example 25.00."
+        },
+        {
+          "covers": "TRF-08",
+          "statement": "whitespace only: no success state is shown",
+          "verdict": "passed",
+          "expected": "no 'Transfer complete'",
+          "observed": "rejected; no API request; messages: Enter an amount to transfer. | Up to two decimal places, for example 25.00."
+        },
+        {
+          "covers": "TRF-04",
+          "statement": "whitespace only: the message explains the problem",
+          "verdict": "passed",
+          "expected": "Explain what a valid amount is (positive, max two decimals)",
+          "observed": "Enter an amount to transfer. \u2014 heuristic: specific message mentioning the problem (heuristic)"
+        },
+        {
+          "covers": "TRF-04",
+          "statement": "Whitespace only: balances are unchanged",
+          "verdict": "passed",
+          "expected": "both balances unchanged",
+          "observed": "unchanged"
+        },
+        {
+          "covers": "TRF-04",
+          "statement": "Whitespace only: no transaction record is created",
+          "verdict": "passed",
+          "expected": "0 new records",
+          "observed": "none"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "TRF-AMT-SPACE amount whitespace only",
+          "value": "screenshots/034-trf-amt-space-amount-whitespace-only.png"
+        },
+        {
+          "kind": "value",
+          "label": "UI outcome",
+          "value": "rejected; no API request; messages: Enter an amount to transfer. | Up to two decimal places, for example 25.00."
+        },
+        {
+          "kind": "note",
+          "label": "Test hygiene",
+          "value": "no drift"
+        }
+      ],
+      "error": "",
+      "duration_s": 2.1,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "TRF-AMT-ZERO",
+      "title": "Reject zero ('0')",
+      "kind": "negative",
+      "anchors": [
+        "positive number greater than zero"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Transfer form: from 'Everyday Checking' to 'Rainy Day Savings', amount '0', memo 'QA-192644-TRF-AMT-ZERO-amt1' -> submit"
+      ],
+      "assertions": [
+        {
+          "covers": "TRF-04",
+          "statement": "zero ('0'): the transfer is rejected",
+          "verdict": "failed",
+          "expected": "validation/error message, no success",
+          "observed": "SUCCESS shown; API 201; messages: Transfer complete Amount $0.00 From Everyday Checking (\u2022\u2022\u2022\u2022 1042) To Rainy Day Savings (\u2022\u2022\u2022\u2022 7781) Date & time Oct 19, 2026, 4:28 PM PDT Memo QA-192644-TRF-AMT-"
+        },
+        {
+          "covers": "TRF-08",
+          "statement": "zero ('0'): no success state is shown",
+          "verdict": "failed",
+          "expected": "no 'Transfer complete'",
+          "observed": "SUCCESS shown; API 201; messages: Transfer complete Amount $0.00 From Everyday Checking (\u2022\u2022\u2022\u2022 1042) To Rainy Day Savings (\u2022\u2022\u2022\u2022 7781) Date & time Oct 19, 2026, 4:28 PM PDT Memo QA-192644-TRF-AMT-"
+        },
+        {
+          "covers": "TRF-04",
+          "statement": "Zero ('0'): balances are unchanged",
+          "verdict": "passed",
+          "expected": "both balances unchanged",
+          "observed": "unchanged"
+        },
+        {
+          "covers": "TRF-04",
+          "statement": "Zero ('0'): no transaction record is created",
+          "verdict": "failed",
+          "expected": "0 new records",
+          "observed": "transfer completed $0.00"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "TRF-AMT-ZERO amount zero ('0')",
+          "value": "screenshots/035-trf-amt-zero-amount-zero-0.png"
+        },
+        {
+          "kind": "value",
+          "label": "UI outcome",
+          "value": "SUCCESS shown; API 201; messages: Transfer complete Amount $0.00 From Everyday Checking (\u2022\u2022\u2022\u2022 1042) To Rainy Day Savings (\u2022\u2022\u2022\u2022 7781) Date & time Oct 19, 2026, 4:28 PM PDT Memo QA-192644-TRF-AMT-"
+        },
+        {
+          "kind": "value",
+          "label": "POST /api/transfers response",
+          "value": "HTTP 201: {\"transaction\":{\"id\":\"51c8e86d-3ca2-401e-93ab-04ea58589ce1\",\"type\":\"transfer\",\"status\":\"completed\",\"amount\":\"0.00\",\"memo\":\"QA-192644-TRF-AMT-ZERO-amt1\",\"occurred_at\":\"2026-10-19T23:28:00.354750Z\",\"source_account\":{\"id\":\"00000000-0000-0000-0000-000000000101\",\"name\":\"Everyday Checking\",\"masked_number\":\"\u2022\u2022\u2022\u2022 1042\"},\"destination_account\":{\"id\":\"00000000-0000-0000-0000-000000000102\",\"name\":\"Rainy Day S"
+        },
+        {
+          "kind": "note",
+          "label": "Test hygiene",
+          "value": "no drift"
+        }
+      ],
+      "error": "",
+      "duration_s": 2.1,
+      "attempts": 1,
+      "verdict": "failed"
+    },
+    {
+      "id": "TRF-AMT-ZERO2",
+      "title": "Reject zero ('0.00')",
+      "kind": "edge",
+      "anchors": [
+        "positive number greater than zero"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Transfer form: from 'Everyday Checking' to 'Rainy Day Savings', amount '0.00', memo 'QA-192644-TRF-AMT-ZERO2-amt1' -> submit"
+      ],
+      "assertions": [
+        {
+          "covers": "TRF-04",
+          "statement": "zero ('0.00'): the transfer is rejected",
+          "verdict": "failed",
+          "expected": "validation/error message, no success",
+          "observed": "SUCCESS shown; API 201; messages: Transfer complete Amount $0.00 From Everyday Checking (\u2022\u2022\u2022\u2022 1042) To Rainy Day Savings (\u2022\u2022\u2022\u2022 7781) Date & time Oct 19, 2026, 4:28 PM PDT Memo QA-192644-TRF-AMT-"
+        },
+        {
+          "covers": "TRF-08",
+          "statement": "zero ('0.00'): no success state is shown",
+          "verdict": "failed",
+          "expected": "no 'Transfer complete'",
+          "observed": "SUCCESS shown; API 201; messages: Transfer complete Amount $0.00 From Everyday Checking (\u2022\u2022\u2022\u2022 1042) To Rainy Day Savings (\u2022\u2022\u2022\u2022 7781) Date & time Oct 19, 2026, 4:28 PM PDT Memo QA-192644-TRF-AMT-"
+        },
+        {
+          "covers": "TRF-04",
+          "statement": "Zero ('0.00'): balances are unchanged",
+          "verdict": "passed",
+          "expected": "both balances unchanged",
+          "observed": "unchanged"
+        },
+        {
+          "covers": "TRF-04",
+          "statement": "Zero ('0.00'): no transaction record is created",
+          "verdict": "failed",
+          "expected": "0 new records",
+          "observed": "transfer completed $0.00"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "TRF-AMT-ZERO2 amount zero ('0.00')",
+          "value": "screenshots/036-trf-amt-zero2-amount-zero-0-00.png"
+        },
+        {
+          "kind": "value",
+          "label": "UI outcome",
+          "value": "SUCCESS shown; API 201; messages: Transfer complete Amount $0.00 From Everyday Checking (\u2022\u2022\u2022\u2022 1042) To Rainy Day Savings (\u2022\u2022\u2022\u2022 7781) Date & time Oct 19, 2026, 4:28 PM PDT Memo QA-192644-TRF-AMT-"
+        },
+        {
+          "kind": "value",
+          "label": "POST /api/transfers response",
+          "value": "HTTP 201: {\"transaction\":{\"id\":\"12a79669-f230-40bd-8f59-9be13c844682\",\"type\":\"transfer\",\"status\":\"completed\",\"amount\":\"0.00\",\"memo\":\"QA-192644-TRF-AMT-ZERO2-amt1\",\"occurred_at\":\"2026-10-19T23:28:02.536831Z\",\"source_account\":{\"id\":\"00000000-0000-0000-0000-000000000101\",\"name\":\"Everyday Checking\",\"masked_number\":\"\u2022\u2022\u2022\u2022 1042\"},\"destination_account\":{\"id\":\"00000000-0000-0000-0000-000000000102\",\"name\":\"Rainy Day "
+        },
+        {
+          "kind": "note",
+          "label": "Test hygiene",
+          "value": "no drift"
+        }
+      ],
+      "error": "",
+      "duration_s": 2.2,
+      "attempts": 1,
+      "verdict": "failed"
+    },
+    {
+      "id": "TRF-SERVER-FAIL",
+      "title": "A server failure is reported as not completed and the user can retry",
+      "kind": "negative",
+      "anchors": [
+        "If a transfer is rejected or fails"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Inject a client-side HTTP 500 for POST /api/transfers (fault injection in our own browser only)",
+        "Transfer form: from 'Everyday Checking' to 'Rainy Day Savings', amount '3.00', memo 'QA-192644-TRF-SERVER-FAIL-fail1' -> submit",
+        "Remove the fault and retry the same transfer",
+        "Transfer form: from 'Everyday Checking' to 'Rainy Day Savings', amount '3.00', memo 'QA-192644-TRF-SERVER-FAIL-fail1' -> submit"
+      ],
+      "assertions": [
+        {
+          "covers": "TRF-08",
+          "statement": "a failed request (HTTP 500): the transfer is rejected",
+          "verdict": "passed",
+          "expected": "validation/error message, no success",
+          "observed": "rejected; API 500; messages: Transfer not completed  DemoBank ran into a problem on its side. Please try again.  No money was moved. Your balances are unchanged."
+        },
+        {
+          "covers": "TRF-08",
+          "statement": "a failed request (HTTP 500): no success state is shown",
+          "verdict": "passed",
+          "expected": "no 'Transfer complete'",
+          "observed": "rejected; API 500; messages: Transfer not completed  DemoBank ran into a problem on its side. Please try again.  No money was moved. Your balances are unchanged."
+        },
+        {
+          "covers": "TRF-08",
+          "statement": "a failed request (HTTP 500): the message explains the problem",
+          "verdict": "passed",
+          "expected": "Say the transfer did not complete and nothing was moved",
+          "observed": "Transfer not completed\n\nDemoBank ran into a problem on its side. Please try again.\n\nNo money was moved. Your balances are unchanged. \u2014 heuristic: specific message mentioning the problem (heuristic)"
+        },
+        {
+          "covers": "UI-05",
+          "statement": "After the failure the form is still usable",
+          "verdict": "passed",
+          "expected": "submit button enabled",
+          "observed": "enabled=True"
+        },
+        {
+          "covers": "UI-05",
+          "statement": "Retrying after the failure succeeds",
+          "verdict": "passed",
+          "expected": "success on retry",
+          "observed": "SUCCESS shown; API 201; messages: Transfer complete Amount $3.00 From Everyday Checking (\u2022\u2022\u2022\u2022 1042) To Rainy Day Savings (\u2022\u2022\u2022\u2022 7781) Date & time Oct 19, 2026, 4:28 PM PDT Memo QA-192644-TRF-SERV"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "TRF-SERVER-FAIL server failure",
+          "value": "screenshots/037-trf-server-fail-server-failure.png"
+        },
+        {
+          "kind": "value",
+          "label": "UI outcome",
+          "value": "rejected; API 500; messages: Transfer not completed  DemoBank ran into a problem on its side. Please try again.  No money was moved. Your balances are unchanged."
+        },
+        {
+          "kind": "value",
+          "label": "POST /api/transfers response",
+          "value": "HTTP 500: {\"error\":{\"code\":\"internal_error\",\"message\":\"Injected failure\"}}"
+        },
+        {
+          "kind": "note",
+          "label": "Test hygiene",
+          "value": "compensating transfer 3.00 Rainy Day Savings -> Everyday Checking: HTTP 201"
+        }
+      ],
+      "error": "",
+      "duration_s": 3.1,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "TRF-DOUBLE",
+      "title": "Double-clicking submit on a slow network creates only one transfer",
+      "kind": "edge",
+      "anchors": [
+        "prevent accidental duplicate submission"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Throttle network to 1.5 s latency, then double-click 'Transfer funds'",
+        "Transfer form: from 'Everyday Checking' to 'Rainy Day Savings', amount '1.11', memo 'QA-192644-TRF-DOUBLE-dbl1' -> submit"
+      ],
+      "assertions": [
+        {
+          "covers": "UI-03",
+          "statement": "UI shows a busy state immediately after submit",
+          "verdict": "passed",
+          "expected": "button disabled / 'Submitting\u2026'",
+          "observed": "{'disabled': True, 'text': 'Submitting transfer\u2026', 'formBusy': 'true'}"
+        },
+        {
+          "covers": "UI-03",
+          "statement": "Double-click produces exactly one transfer",
+          "verdict": "passed",
+          "expected": "1 record, 1 POST",
+          "observed": "1 record(s), 1 POST(s)"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "value",
+          "label": "Button state right after click",
+          "value": "{'disabled': True, 'text': 'Submitting transfer\u2026', 'formBusy': 'true'}"
+        },
+        {
+          "kind": "note",
+          "label": "Test hygiene",
+          "value": "compensating transfer 1.11 Rainy Day Savings -> Everyday Checking: HTTP 201"
+        }
+      ],
+      "error": "",
+      "duration_s": 3.4,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "TRF-MEMO-TEXT",
+      "title": "Memo with HTML/special characters is stored and shown literally",
+      "kind": "edge",
+      "anchors": [
+        "memo if supplied"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Transfer form: from 'Everyday Checking' to 'Rainy Day Savings', amount '0.50', memo '<b>bold</b> & \"quote\" QA-192644-TRF-MEMO-TEXT-html1' -> submit"
+      ],
+      "assertions": [
+        {
+          "covers": "TRF-07",
+          "statement": "Memo is displayed exactly as typed, not interpreted as HTML",
+          "verdict": "passed",
+          "expected": "1 row with literal '<b>bold</b>'",
+          "observed": "success=True; rows=1; injected <b> elements=0"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "TRF-MEMO-TEXT html memo",
+          "value": "screenshots/038-trf-memo-text-html-memo.png"
+        },
+        {
+          "kind": "note",
+          "label": "Test hygiene",
+          "value": "compensating transfer 0.50 Rainy Day Savings -> Everyday Checking: HTTP 201"
+        }
+      ],
+      "error": "",
+      "duration_s": 3.0,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "UI-RESPONSIVE",
+      "title": "Usable at 1280\u00d7800 and at narrower widths (tablet, phone)",
+      "kind": "edge",
+      "anchors": [
+        "1280 \u00d7 800 viewport"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'"
+      ],
+      "assertions": [
+        {
+          "covers": "UI-01",
+          "statement": "1280\u00d7800 /dashboard: no horizontal page scroll, header actions reachable",
+          "verdict": "passed",
+          "expected": "scrollWidth \u2264 viewport, Log out on screen",
+          "observed": "scrollWidth=1280 viewport=1280 logout_in_view=True"
+        },
+        {
+          "covers": "UI-01",
+          "statement": "1280\u00d7800 /transfer: no horizontal page scroll, header actions reachable",
+          "verdict": "passed",
+          "expected": "scrollWidth \u2264 viewport, Log out on screen",
+          "observed": "scrollWidth=1280 viewport=1280 logout_in_view=True"
+        },
+        {
+          "covers": "UI-01",
+          "statement": "1280\u00d7800 /transactions: no horizontal page scroll, header actions reachable",
+          "verdict": "passed",
+          "expected": "scrollWidth \u2264 viewport, Log out on screen",
+          "observed": "scrollWidth=1280 viewport=1280 logout_in_view=True"
+        },
+        {
+          "covers": "UI-01",
+          "statement": "768\u00d71024 /dashboard: no horizontal page scroll, header actions reachable",
+          "verdict": "passed",
+          "expected": "scrollWidth \u2264 viewport, Log out on screen",
+          "observed": "scrollWidth=768 viewport=768 logout_in_view=True"
+        },
+        {
+          "covers": "UI-01",
+          "statement": "768\u00d71024 /transfer: no horizontal page scroll, header actions reachable",
+          "verdict": "passed",
+          "expected": "scrollWidth \u2264 viewport, Log out on screen",
+          "observed": "scrollWidth=768 viewport=768 logout_in_view=True"
+        },
+        {
+          "covers": "UI-01",
+          "statement": "768\u00d71024 /transactions: no horizontal page scroll, header actions reachable",
+          "verdict": "passed",
+          "expected": "scrollWidth \u2264 viewport, Log out on screen",
+          "observed": "scrollWidth=768 viewport=768 logout_in_view=True"
+        },
+        {
+          "covers": "UI-01",
+          "statement": "390\u00d7844 /dashboard: no horizontal page scroll, header actions reachable",
+          "verdict": "passed",
+          "expected": "scrollWidth \u2264 viewport, Log out on screen",
+          "observed": "scrollWidth=390 viewport=390 logout_in_view=True"
+        },
+        {
+          "covers": "UI-01",
+          "statement": "390\u00d7844 /transfer: no horizontal page scroll, header actions reachable",
+          "verdict": "passed",
+          "expected": "scrollWidth \u2264 viewport, Log out on screen",
+          "observed": "scrollWidth=390 viewport=390 logout_in_view=True"
+        },
+        {
+          "covers": "UI-01",
+          "statement": "390\u00d7844 /transactions: no horizontal page scroll, header actions reachable",
+          "verdict": "passed",
+          "expected": "scrollWidth \u2264 viewport, Log out on screen",
+          "observed": "scrollWidth=390 viewport=390 logout_in_view=True"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "UI-RESPONSIVE 1280x800 /dashboard",
+          "value": "screenshots/039-ui-responsive-1280x800-dashboard.png"
+        },
+        {
+          "kind": "screenshot",
+          "label": "UI-RESPONSIVE 768x1024 /dashboard",
+          "value": "screenshots/040-ui-responsive-768x1024-dashboard.png"
+        },
+        {
+          "kind": "screenshot",
+          "label": "UI-RESPONSIVE 390x844 /dashboard",
+          "value": "screenshots/041-ui-responsive-390x844-dashboard.png"
+        }
+      ],
+      "error": "",
+      "duration_s": 7.2,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "UI-LABELS",
+      "title": "Every interactive control has a readable accessible label",
+      "kind": "positive",
+      "anchors": [
+        "Interactive controls have readable labels"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'"
+      ],
+      "assertions": [
+        {
+          "covers": "UI-02",
+          "statement": "/dashboard: all controls have an accessible name",
+          "verdict": "passed",
+          "expected": "0 unlabelled controls",
+          "observed": "all labelled"
+        },
+        {
+          "covers": "UI-02",
+          "statement": "/transfer: all controls have an accessible name",
+          "verdict": "passed",
+          "expected": "0 unlabelled controls",
+          "observed": "all labelled"
+        },
+        {
+          "covers": "UI-02",
+          "statement": "/transactions: all controls have an accessible name",
+          "verdict": "passed",
+          "expected": "0 unlabelled controls",
+          "observed": "all labelled"
+        },
+        {
+          "covers": "UI-02",
+          "statement": "/profile: all controls have an accessible name",
+          "verdict": "passed",
+          "expected": "0 unlabelled controls",
+          "observed": "all labelled"
+        }
+      ],
+      "evidence": [],
+      "error": "",
+      "duration_s": 3.3,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "UI-NAV",
+      "title": "Navigation links and buttons lead to their labelled destinations",
+      "kind": "positive",
+      "anchors": [
+        "Navigation links and buttons lead to the labeled destination"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'"
+      ],
+      "assertions": [
+        {
+          "covers": "UI-04",
+          "statement": "Nav 'Dashboard' opens the Dashboard page",
+          "verdict": "passed",
+          "expected": "page about 'Dashboard'",
+          "observed": "URL /dashboard, h1 'Welcome, Avery Demo'"
+        },
+        {
+          "covers": "UI-04",
+          "statement": "Nav 'Transactions' opens the Transactions page",
+          "verdict": "passed",
+          "expected": "page about 'Transactions'",
+          "observed": "URL /transactions, h1 'Transactions'"
+        },
+        {
+          "covers": "UI-04",
+          "statement": "Nav 'Transfer' opens the Transfer page",
+          "verdict": "passed",
+          "expected": "page about 'Transfer'",
+          "observed": "URL /transfer, h1 'Transfer between your accounts'"
+        },
+        {
+          "covers": "UI-04",
+          "statement": "Nav 'Profile' opens the Profile page",
+          "verdict": "passed",
+          "expected": "page about 'Profile'",
+          "observed": "URL /profile, h1 'Your profile'"
+        },
+        {
+          "covers": "UI-04",
+          "statement": "Dashboard 'Transfer funds' \u2192 /transfer",
+          "verdict": "passed",
+          "expected": "/transfer",
+          "observed": "/transfer"
+        },
+        {
+          "covers": "UI-04",
+          "statement": "Dashboard 'View all transactions' \u2192 /transactions",
+          "verdict": "passed",
+          "expected": "/transactions",
+          "observed": "/transactions"
+        },
+        {
+          "covers": "UI-04",
+          "statement": "'Transfer from this account' pre-selects that account as source",
+          "verdict": "passed",
+          "expected": "Rainy Day Savings",
+          "observed": "Rainy Day Savings (\u2022\u2022\u2022\u2022 7781) \u2014 $8,275.00"
+        },
+        {
+          "covers": "UI-04",
+          "statement": "'Filter full history' opens history filtered to that account",
+          "verdict": "passed",
+          "expected": "only Rainy Day Savings rows",
+          "observed": "26 rows, 0 foreign"
+        },
+        {
+          "covers": "UI-05",
+          "statement": "Unknown URL offers a way back to the dashboard",
+          "verdict": "passed",
+          "expected": "'Back to dashboard' link",
+          "observed": "Page not found\n\nWe couldn't find that page.\n\nBack to dashboard"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "value",
+          "label": "Navigation items discovered",
+          "value": "['Dashboard', 'Transactions', 'Transfer', 'Profile']"
+        }
+      ],
+      "error": "",
+      "duration_s": 7.7,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "UI-ERROR-RECOVERY",
+      "title": "When account data fails to load, the user can retry or go back",
+      "kind": "negative",
+      "anchors": [
+        "A recoverable error must leave the user able to retry"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "Inject HTTP 503 for GET /api/accounts in this browser only, open /dashboard"
+      ],
+      "assertions": [
+        {
+          "covers": "UI-05",
+          "statement": "A visible error with a retry option appears",
+          "verdict": "passed",
+          "expected": "error message + 'Try again'",
+          "observed": "alerts=1 retry buttons=1: \"We couldn't load your accounts\\n\\nDemoBank ran into a problem on its side. Please try again.\\n\\nTry again\""
+        },
+        {
+          "covers": "UI-05",
+          "statement": "After the outage ends, 'Try again' recovers",
+          "verdict": "passed",
+          "expected": "account cards visible",
+          "observed": "recovered=True"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "UI-ERROR-RECOVERY load error",
+          "value": "screenshots/042-ui-error-recovery-load-error.png"
+        }
+      ],
+      "error": "",
+      "duration_s": 1.7,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "SES-LOGOUT",
+      "title": "Log out returns to landing and locks protected routes",
+      "kind": "negative",
+      "anchors": [
+        "Logging out returns the user to the landing page"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'",
+        "On /transactions, click 'Log out'",
+        "Press browser Back after logout",
+        "Navigate directly to /dashboard after logout",
+        "Navigate directly to /transactions after logout",
+        "Navigate directly to /transfer after logout",
+        "Navigate directly to /profile after logout",
+        "Navigate directly to /accounts/00000000-0000-0000-0000-000000000101 after logout",
+        "Refresh while logged out",
+        "Replay the pre-logout session cookie against the API from a new browser profile"
+      ],
+      "assertions": [
+        {
+          "covers": "SES-04",
+          "statement": "Log out returns to the landing page",
+          "verdict": "passed",
+          "expected": "URL '/' with 'Enter Demo' visible",
+          "observed": "URL /, Enter Demo visible=True"
+        },
+        {
+          "covers": "SES-04",
+          "statement": "Browser Back after logout does not show private data",
+          "verdict": "passed",
+          "expected": "landing/access-required page",
+          "observed": "URL /; protected=False"
+        },
+        {
+          "covers": "SES-04",
+          "statement": "Direct navigation to /dashboard after logout is blocked",
+          "verdict": "passed",
+          "expected": "landing page or access-required state",
+          "observed": "URL /; protected=False"
+        },
+        {
+          "covers": "SES-04",
+          "statement": "Direct navigation to /transactions after logout is blocked",
+          "verdict": "passed",
+          "expected": "landing page or access-required state",
+          "observed": "URL /; protected=False"
+        },
+        {
+          "covers": "SES-04",
+          "statement": "Direct navigation to /transfer after logout is blocked",
+          "verdict": "passed",
+          "expected": "landing page or access-required state",
+          "observed": "URL /; protected=False"
+        },
+        {
+          "covers": "SES-04",
+          "statement": "Direct navigation to /profile after logout is blocked",
+          "verdict": "passed",
+          "expected": "landing page or access-required state",
+          "observed": "URL /; protected=False"
+        },
+        {
+          "covers": "SES-04",
+          "statement": "Direct navigation to /accounts/00000000-0000-0000-0000-000000000101 after logout is blocked",
+          "verdict": "passed",
+          "expected": "landing page or access-required state",
+          "observed": "URL /; protected=False"
+        },
+        {
+          "covers": "SES-05",
+          "statement": "Refreshing after logout does not restore access",
+          "verdict": "passed",
+          "expected": "still logged out",
+          "observed": "URL /; protected=False"
+        },
+        {
+          "covers": "SES-04",
+          "statement": "The session is revoked server-side (old cookie gets 401)",
+          "verdict": "passed",
+          "expected": "HTTP 401 for the replayed cookie",
+          "observed": "HTTP 401"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "label": "SES-LOGOUT after logout",
+          "value": "screenshots/043-ses-logout-after-logout.png"
+        }
+      ],
+      "error": "",
+      "duration_s": 6.6,
+      "attempts": 1,
+      "verdict": "passed"
+    },
+    {
+      "id": "GEN-NETWORK",
+      "title": "The app only talks to its own frontend and API hosts",
+      "kind": "positive",
+      "anchors": [
+        "never initiate real payments"
+      ],
+      "steps": [
+        "Open the app in a fresh browser profile and click 'Enter Demo'"
+      ],
+      "assertions": [
+        {
+          "covers": "GEN-01",
+          "statement": "No requests to external (bank/payment) hosts during the whole run",
+          "verdict": "passed",
+          "expected": "only app hosts",
+          "observed": "only ['localhost:5173', 'localhost:8000']"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "value",
+          "label": "Hosts contacted during the whole run",
+          "value": "['localhost:5173', 'localhost:8000']"
+        }
+      ],
+      "error": "",
+      "duration_s": 1.0,
+      "attempts": 1,
+      "verdict": "passed"
+    }
+  ],
+  "cost": {
+    "total_usd": 0,
+    "by_purpose": [],
+    "entries": [],
+    "fallbacks": [
+      "prd_enrichment",
+      "clarity_judge",
+      "executive_summary"
+    ],
+    "estimated_usd_if_enabled": 0.035641,
+    "estimates": [
+      {
+        "purpose": "prd_enrichment",
+        "model": "claude-sonnet-5-5",
+        "input_tokens": 1528,
+        "output_tokens": 3200,
+        "usd": 0.035056
+      },
+      {
+        "purpose": "clarity_judge",
+        "model": "claude-haiku-5-5",
+        "input_tokens": 788,
+        "output_tokens": 152,
+        "usd": 0.000155
+      },
+      {
+        "purpose": "executive_summary",
+        "model": "claude-haiku-5-5",
+        "input_tokens": 1296,
+        "output_tokens": 600,
+        "usd": 0.00043
+      }
+    ]
+  }
+}
